@@ -94,12 +94,14 @@ public class HotFoodUI {
 		txtpnUserName.setToolTipText("Enter your email address");
 		txtpnUserName.setText("User name");
 		txtpnUserName.setBounds(38, 255, 138, 26);
+		txtpnUserName.setEditable(false);
 		frame.getContentPane().add(txtpnUserName);
 		
 		JTextPane txtpnPassword = new JTextPane();
 		txtpnPassword.setToolTipText("Enter your password at least 8 characters");
 		txtpnPassword.setText("Password");
 		txtpnPassword.setBounds(38, 294, 138, 26);
+		txtpnPassword.setEditable(false);
 		frame.getContentPane().add(txtpnPassword);
 		
 		passwordField = new JPasswordField();
@@ -116,6 +118,7 @@ public class HotFoodUI {
 		txtpnUserType.setToolTipText("choose your user type");
 		txtpnUserType.setText("User type");
 		txtpnUserType.setBounds(38, 330, 138, 26);
+		txtpnUserType.setEditable(false);
 		frame.getContentPane().add(txtpnUserType);
 		
 		JComboBox comboBox = new JComboBox();
@@ -128,12 +131,14 @@ public class HotFoodUI {
 		textPane.setToolTipText("Enter your email address");
 		textPane.setText("User name");
 		textPane.setBounds(38, 100, 138, 26);
+		textPane.setEditable(false);
 		frame.getContentPane().add(textPane);
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setToolTipText("Enter your password at least 8 characters");
 		textPane_1.setText("Password");
 		textPane_1.setBounds(38, 135, 138, 26);
+		textPane_1.setEditable(false);
 		frame.getContentPane().add(textPane_1);
 		
 		textField_1 = new JTextField();
