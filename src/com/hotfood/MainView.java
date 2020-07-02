@@ -1,3 +1,4 @@
+package com.hotfood;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,55 +16,27 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 
-public class HotFoodUI {
+public class MainView {
 
-	private JFrame frame;
-	private JTextField txtHotFoodOnline;
-	private JPasswordField passwordField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPasswordField passwordField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HotFoodUI window = new HotFoodUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public HotFoodUI() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
+	public MainView() {
+		JFrame frame = new JFrame();
 		frame.getContentPane().setForeground(SystemColor.activeCaptionText);
 		frame.getContentPane().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
 		frame.setBounds(100, 100, 546, 498);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		
+		JTextField loginUsernameInput = new JTextField();
+		JPasswordField loginPasswordInput = new JPasswordField();
+		JTextField registerUsernameInput = new JTextField();
+		JPasswordField registerPasswordInput = new JPasswordField();
+		JTextPane txtpnUserType = new JTextPane();
+
+		LoginController loginController = new LoginController(loginUsernameInput,loginPasswordInput,registerUsernameInput,registerPasswordInput,txtpnUserType);
 		
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "You are logged in successfully!");
-			}
-		});
+		btnNewButton.addActionListener(loginController);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton.setBounds(147, 177, 115, 29);
 		frame.getContentPane().add(btnNewButton);
@@ -80,7 +53,7 @@ public class HotFoodUI {
 		btnRegister.setBounds(147, 378, 115, 29);
 		frame.getContentPane().add(btnRegister);
 		
-		txtHotFoodOnline = new JTextField();
+		JTextField txtHotFoodOnline = new JTextField();
 		txtHotFoodOnline.setForeground(SystemColor.desktop);
 		txtHotFoodOnline.setBackground(SystemColor.menu);
 		txtHotFoodOnline.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -104,17 +77,14 @@ public class HotFoodUI {
 		txtpnPassword.setEditable(false);
 		frame.getContentPane().add(txtpnPassword);
 		
-		passwordField = new JPasswordField();
-		passwordField.setToolTipText("Enter your passwrd");
-		passwordField.setBounds(191, 294, 153, 26);
-		frame.getContentPane().add(passwordField);
+		registerPasswordInput.setToolTipText("Enter your passwrd");
+		registerPasswordInput.setBounds(191, 294, 153, 26);
+		frame.getContentPane().add(registerPasswordInput);
 		
-		textField = new JTextField();
-		textField.setBounds(191, 255, 153, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		registerUsernameInput.setBounds(191, 255, 153, 26);
+		frame.getContentPane().add(registerUsernameInput);
+		registerUsernameInput.setColumns(10);
 		
-		JTextPane txtpnUserType = new JTextPane();
 		txtpnUserType.setToolTipText("choose your user type");
 		txtpnUserType.setText("User type");
 		txtpnUserType.setBounds(38, 330, 138, 26);
@@ -141,15 +111,13 @@ public class HotFoodUI {
 		textPane_1.setEditable(false);
 		frame.getContentPane().add(textPane_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(191, 100, 153, 26);
-		frame.getContentPane().add(textField_1);
+		loginUsernameInput.setColumns(10);
+		loginUsernameInput.setBounds(191, 100, 153, 26);
+		frame.getContentPane().add(loginUsernameInput);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setToolTipText("Enter your passwrd");
-		passwordField_1.setBounds(191, 135, 153, 26);
-		frame.getContentPane().add(passwordField_1);
+		loginPasswordInput.setToolTipText("Enter your passwrd");
+		loginPasswordInput.setBounds(191, 135, 153, 26);
+		frame.getContentPane().add(loginPasswordInput);
 		
 		JLabel lblNewLabel = new JLabel("Are you existed user?");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
