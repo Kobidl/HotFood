@@ -31,9 +31,9 @@ public class MainView {
 		JPasswordField loginPasswordInput = new JPasswordField();
 		JTextField registerUsernameInput = new JTextField();
 		JPasswordField registerPasswordInput = new JPasswordField();
-		JTextPane txtpnUserType = new JTextPane();
-
-		LoginController loginController = new LoginController(loginUsernameInput,loginPasswordInput,registerUsernameInput,registerPasswordInput,txtpnUserType);
+		JComboBox userTypeSelectBox = new JComboBox();
+		
+		LoginController loginController = new LoginController(loginUsernameInput,loginPasswordInput,registerUsernameInput,registerPasswordInput,userTypeSelectBox);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(loginController);
@@ -43,12 +43,7 @@ public class MainView {
 		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setToolTipText("click here to register as a new user");
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "You registred  in successfully!");
-
-			}
-		});
+		btnRegister.addActionListener(loginController);
 		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnRegister.setBounds(147, 378, 115, 29);
 		frame.getContentPane().add(btnRegister);
@@ -85,17 +80,18 @@ public class MainView {
 		frame.getContentPane().add(registerUsernameInput);
 		registerUsernameInput.setColumns(10);
 		
+		JTextPane txtpnUserType =  new JTextPane();
 		txtpnUserType.setToolTipText("choose your user type");
 		txtpnUserType.setText("User type");
 		txtpnUserType.setBounds(38, 330, 138, 26);
 		txtpnUserType.setEditable(false);
 		frame.getContentPane().add(txtpnUserType);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.BOLD, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Resturant Owner", "Customer"}));
-		comboBox.setBounds(194, 336, 150, 26);
-		frame.getContentPane().add(comboBox);
+		
+		userTypeSelectBox.setFont(new Font("Tahoma", Font.BOLD, 13));
+		userTypeSelectBox.setModel(new DefaultComboBoxModel(new String[] {"Resturant Owner", "Customer"}));
+		userTypeSelectBox.setBounds(194, 336, 150, 26);
+		frame.getContentPane().add(userTypeSelectBox);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setToolTipText("Enter your email address");
