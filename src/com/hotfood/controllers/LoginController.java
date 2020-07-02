@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.hotfood.models.User;
+
 public class LoginController implements ActionListener {
 	
 	private JTextField loginEmail;
@@ -40,19 +42,21 @@ public class LoginController implements ActionListener {
 	}
 	
 	
-	private void login(){
+	private User login(){
 		String email = this.loginEmail.getText().trim();
 		String password = this.loginPassword.getText().trim();
+		User user = null;
 		if(email.isEmpty() || password.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
 		}else {
-			boolean found = FilesController.checkIfUserExistInUsers(email,password);
-			if(found) {
+			user = FilesController.getUserFromUsers(email, password);
+			if(user != null) {
 				JOptionPane.showMessageDialog(null, "User Found!");
 			}else {
 				JOptionPane.showMessageDialog(null, "User not found!");
 			}
 		}
+		return user;
 	}
 	
 	private void register() {
@@ -63,7 +67,7 @@ public class LoginController implements ActionListener {
 		if(email.isEmpty() || password.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
 		}else {
-			boolean exists = FilesController.checkIfUserExistInUsers(email,null);
+			boolean exists = FilesController.checkIfUserExistInUsers(email);
 			if(exists) {
 				JOptionPane.showMessageDialog(null,"User already found with this email");
 			}else {
