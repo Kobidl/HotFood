@@ -30,13 +30,13 @@ public class MainView {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
-		JTextField loginUsernameInput = new JTextField();
+		JTextField loginEmailInput = new JTextField();
 		JPasswordField loginPasswordInput = new JPasswordField();
-		JTextField registerUsernameInput = new JTextField();
+		JTextField registerEmailInput = new JTextField();
 		JPasswordField registerPasswordInput = new JPasswordField();
 		JComboBox userTypeSelectBox = new JComboBox();
 		
-		LoginController loginController = new LoginController(loginUsernameInput,loginPasswordInput,registerUsernameInput,registerPasswordInput,userTypeSelectBox);
+		LoginController loginController = new LoginController(loginEmailInput,loginPasswordInput,registerEmailInput,registerPasswordInput,userTypeSelectBox);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(loginController);
@@ -63,7 +63,7 @@ public class MainView {
 		
 		JTextPane txtpnUserName = new JTextPane();
 		txtpnUserName.setToolTipText("Enter your email address");
-		txtpnUserName.setText("User name");
+		txtpnUserName.setText("Email");
 		txtpnUserName.setBounds(38, 255, 138, 26);
 		txtpnUserName.setEditable(false);
 		frame.getContentPane().add(txtpnUserName);
@@ -79,9 +79,9 @@ public class MainView {
 		registerPasswordInput.setBounds(191, 294, 153, 26);
 		frame.getContentPane().add(registerPasswordInput);
 		
-		registerUsernameInput.setBounds(191, 255, 153, 26);
-		frame.getContentPane().add(registerUsernameInput);
-		registerUsernameInput.setColumns(10);
+		registerEmailInput.setBounds(191, 255, 153, 26);
+		frame.getContentPane().add(registerEmailInput);
+		registerEmailInput.setColumns(10);
 		
 		JTextPane txtpnUserType =  new JTextPane();
 		txtpnUserType.setToolTipText("choose your user type");
@@ -96,12 +96,12 @@ public class MainView {
 		userTypeSelectBox.setBounds(194, 336, 150, 26);
 		frame.getContentPane().add(userTypeSelectBox);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setToolTipText("Enter your email address");
-		textPane.setText("User name");
-		textPane.setBounds(38, 100, 138, 26);
-		textPane.setEditable(false);
-		frame.getContentPane().add(textPane);
+		JTextPane txtpnEmail = new JTextPane();
+		txtpnEmail.setToolTipText("Enter your email address");
+		txtpnEmail.setText("Email");
+		txtpnEmail.setBounds(38, 100, 138, 26);
+		txtpnEmail.setEditable(false);
+		frame.getContentPane().add(txtpnEmail);
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setToolTipText("Enter your password at least 8 characters");
@@ -110,9 +110,9 @@ public class MainView {
 		textPane_1.setEditable(false);
 		frame.getContentPane().add(textPane_1);
 		
-		loginUsernameInput.setColumns(10);
-		loginUsernameInput.setBounds(191, 100, 153, 26);
-		frame.getContentPane().add(loginUsernameInput);
+		loginEmailInput.setColumns(10);
+		loginEmailInput.setBounds(191, 100, 153, 26);
+		frame.getContentPane().add(loginEmailInput);
 		
 		loginPasswordInput.setToolTipText("Enter your passwrd");
 		loginPasswordInput.setBounds(191, 135, 153, 26);

@@ -13,7 +13,7 @@ public class FilesController {
 	
 	private final static String path = "data/users";
 
-	public static boolean checkIfUserExistInUsers(String username,String password) {
+	public static boolean checkIfUserExistInUsers(String email,String password) {
 		BufferedReader reader;
 		boolean found = false;
 		try {
@@ -23,9 +23,9 @@ public class FilesController {
 			while (line != null) {
 				String [] details = line.split(";");
 				if(details.length > 1) {
-					String user = details[0];
+					String e = details[0];
 					String pass = details[1];
-					if(username.equals(user) && (password== null || password.equals(pass))) {
+					if(email.equals(e) && (password== null || password.equals(pass))) {
 						System.out.print("found");
 						found = true;
 						break;
@@ -41,8 +41,8 @@ public class FilesController {
 		return found;
 	}
 	
-	public static boolean createNewUser(String username,String password,int type) {
-		String line = System.lineSeparator() + username +";"+ password+";"+type;
+	public static boolean createNewUser(String email,String password,int type) {
+		String line = System.lineSeparator() + email +";"+ password+";"+type;
 		File f = new File(path);
 		boolean created = false;
         try {

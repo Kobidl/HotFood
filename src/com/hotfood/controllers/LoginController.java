@@ -10,18 +10,18 @@ import javax.swing.JTextField;
 
 public class LoginController implements ActionListener {
 	
-	private JTextField loginUsername;
+	private JTextField loginEmail;
 	private JPasswordField loginPassword;
-	private JTextField registerUsername;
+	private JTextField registerEmail;
 	private JPasswordField registerPassword;
 	private JComboBox userType;	
 
 	
-	public LoginController(JTextField loginUsernameInput, JPasswordField loginPasswordInput, JTextField registerUsernameInput, JPasswordField registerPasswordInput, JComboBox userTypeSelectBox) {
+	public LoginController(JTextField loginEmailInput, JPasswordField loginPasswordInput, JTextField registerEmailInput, JPasswordField registerPasswordInput, JComboBox userTypeSelectBox) {
 		super();
-		this.loginUsername = loginUsernameInput;
+		this.loginEmail = loginEmailInput;
 		this.loginPassword = loginPasswordInput;
-		this.registerUsername = registerUsernameInput;
+		this.registerEmail = registerEmailInput;
 		this.registerPassword = registerPasswordInput;
 		this.userType = userTypeSelectBox;
 	}
@@ -41,12 +41,12 @@ public class LoginController implements ActionListener {
 	
 	
 	private void login(){
-		String username = this.loginUsername.getText().trim();
+		String email = this.loginEmail.getText().trim();
 		String password = this.loginPassword.getText().trim();
-		if(username.isEmpty() || password.isEmpty()) {
+		if(email.isEmpty() || password.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
 		}else {
-			boolean found = FilesController.checkIfUserExistInUsers(username,password);
+			boolean found = FilesController.checkIfUserExistInUsers(email,password);
 			if(found) {
 				JOptionPane.showMessageDialog(null, "User Found!");
 			}else {
@@ -56,18 +56,18 @@ public class LoginController implements ActionListener {
 	}
 	
 	private void register() {
-		String username = this.registerUsername.getText().trim();
+		String email = this.registerEmail.getText().trim();
 		String password = this.registerPassword.getText().trim();
 		int type = this.userType.getSelectedIndex();
 		
-		if(username.isEmpty() || password.isEmpty()) {
+		if(email.isEmpty() || password.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
 		}else {
-			boolean exists = FilesController.checkIfUserExistInUsers(username,null);
+			boolean exists = FilesController.checkIfUserExistInUsers(email,null);
 			if(exists) {
-				JOptionPane.showMessageDialog(null,"User already found");
+				JOptionPane.showMessageDialog(null,"User already found with this email");
 			}else {
-				boolean success = FilesController.createNewUser(username,password,type);
+				boolean success = FilesController.createNewUser(email,password,type);
 				if(success) {
 					JOptionPane.showMessageDialog(null,"User Created successfully");
 				}else {
