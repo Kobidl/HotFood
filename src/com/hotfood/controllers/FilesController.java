@@ -1,4 +1,4 @@
-package com.hotfood;
+package com.hotfood.controllers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

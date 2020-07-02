@@ -1,4 +1,4 @@
-package com.hotfood;
+package com.hotfood.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

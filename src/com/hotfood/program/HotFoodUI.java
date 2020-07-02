@@ -1,4 +1,4 @@
-package com.hotfood;
+package com.hotfood.program;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import com.hotfood.MainView;
+import com.hotfood.ui.MainView;
 
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
