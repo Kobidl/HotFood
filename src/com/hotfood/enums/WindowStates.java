@@ -2,6 +2,6 @@ package com.hotfood.enums;
 
 public enum WindowStates {
 	Login,
-	LoggedIn,
+	Resturants,
 	Menu
 }

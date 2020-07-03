@@ -36,8 +36,8 @@ public class HotFoodUI {
 			public void run() {
 				try {
 					MainView mainView = new MainView();
-					MainModel mainModel = new MainModel();
-					MainController mainController = new MainController(mainView,mainModel);
+//					MainModel mainModel = new MainModel();
+//					MainController mainController = new MainController(mainView,mainModel);
 					
 					mainView.setVisible(true);
 				} catch (Exception e) {
