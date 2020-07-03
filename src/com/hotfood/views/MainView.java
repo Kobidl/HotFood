@@ -48,9 +48,9 @@ public class MainView extends JFrame {
 		
 		MainModel mainModel = new MainModel();
 		
-		MainController mainController = new MainController(this,mainModel,resturantsModel); 
-		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel);
+		MainController mainController = new MainController(this,mainModel,resturantsController); 
+		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 
 		layeredPane.removeAll();
 		layeredPane.add(loginPane);

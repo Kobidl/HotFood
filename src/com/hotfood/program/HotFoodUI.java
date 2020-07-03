@@ -47,15 +47,4 @@ public class HotFoodUI {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public static JFrame createMainUI() {
-		
-		return new MainView();
-	}
-	
-
-
-
 }

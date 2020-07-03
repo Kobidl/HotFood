@@ -10,19 +10,19 @@ public class MainController {
 
 	private MainView mainView;
 	private MainModel mainModel;
-	private ResturantsModel resturantsModel;
+	private ResturantsController resturantsController;
 	
-	public MainController(MainView mainView, MainModel mainModel, ResturantsModel resturantsModel) {
+	public MainController(MainView mainView, MainModel mainModel, ResturantsController resturantsController) {
 		this.mainView = mainView;
 		this.mainModel = mainModel;
-		this.resturantsModel = resturantsModel;
+		this.resturantsController = resturantsController;
 	
 	}
 	
 	
 	public void switchWindowToResturants(Customer customer) {
 		this.mainView.setCustomer(customer);
-		this.resturantsModel.init();
+		this.resturantsController.init();
 		this.mainView.switchWindow(WindowStates.Resturants);
 	}
 
