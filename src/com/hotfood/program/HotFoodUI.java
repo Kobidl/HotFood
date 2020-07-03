@@ -10,7 +10,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import com.hotfood.ui.MainView;
+import com.hotfood.controllers.MainController;
+import com.hotfood.models.MainModel;
+import com.hotfood.views.LoginView;
+import com.hotfood.views.MainView;
 
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
@@ -18,6 +21,8 @@ import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import java.awt.BorderLayout;
 
 public class HotFoodUI {
 
@@ -30,8 +35,11 @@ public class HotFoodUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					createMainUI();
-//					window.frame.setVisible(true);
+					MainView mainView = new MainView();
+					MainModel mainModel = new MainModel();
+					MainController mainController = new MainController(mainView,mainModel);
+					
+					mainView.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,9 +50,12 @@ public class HotFoodUI {
 	/**
 	 * Create the application.
 	 */
-	public static void createMainUI() throws Exception {
-		new MainView();
+	public static JFrame createMainUI() {
+		
+		return new MainView();
 	}
+	
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.hotfood.controllers;
+package com.hotfood.handlers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import com.hotfood.models.User;
 
-public class FilesController {
+public class FilesHandler {
 	
 	private final static String path = "data/users";
 	private final static String spliter = ",";
