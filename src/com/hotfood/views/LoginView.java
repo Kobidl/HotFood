@@ -64,7 +64,7 @@ public class LoginView extends JPanel {
 		lblNewLabel.setBounds(169, 65, 133, 15);
 		this.add(lblNewLabel);
 		
-		JLabel lblRegisterHereFor = new JLabel("Register here for creating user new user");
+		JLabel lblRegisterHereFor = new JLabel("Register here for creating new user");
 		lblRegisterHereFor.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblRegisterHereFor.setBounds(106, 200, 248, 15);
 		this.add(lblRegisterHereFor);
