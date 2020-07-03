@@ -13,9 +13,11 @@ import java.util.UUID;
 import com.hotfood.models.User;
 
 public class FilesHandler {
-	
-	private final static String path = "data/users";
 	private final static String spliter = ",";
+
+	private final static String path = "data/users.csv";
+	private final static String cartsPath = "data/carts.csv";
+	
 	
 	public static User getUserFromUsers(String email,String password) {
 		User user = null;
@@ -89,4 +91,14 @@ public class FilesHandler {
 		
 		return created;
 	}
+
+	public static void getCartData(String id) {
+		File f = new File(cartsPath);
+		if(f.exists() && !f.isDirectory()) { 
+		    
+		}
+
+		
+	}
+
 }

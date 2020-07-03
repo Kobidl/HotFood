@@ -4,7 +4,7 @@ import com.hotfood.controllers.MainController;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.views.MainView;
 
-public class MainModel {
+public class MainModel  {
 
 	private WindowStates state = WindowStates.Login;
 	
