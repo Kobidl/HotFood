@@ -22,6 +22,7 @@ public class LoginController {
 		this.loginView = loginView;
 		
 		this.loginView.addLoginListener(new LoginListener());
+		this.loginView.addRegisterListener(new RegisterListener());
 	}
 	
 	class LoginListener implements ActionListener{
