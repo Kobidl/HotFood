@@ -23,6 +23,7 @@ public class LoginView extends JPanel {
 	private JComboBox userTypeSelectBox = new JComboBox();
 	private JButton loginButton = new JButton("Login");
 	private JButton registerButton = new JButton("Register");
+	private JTextField registerName = new JTextField(40);
 	
 	public LoginView() {
 		setLayout(null);
@@ -34,7 +35,7 @@ public class LoginView extends JPanel {
 		
 		registerButton.setToolTipText("click here to register as a new user");
 		registerButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		registerButton.setBounds(173, 343, 133, 25);
+		registerButton.setBounds(173, 374, 133, 25);
 		this.add(registerButton);
 		
 		registerPasswordInput.setToolTipText("Enter your passwrd");
@@ -48,7 +49,7 @@ public class LoginView extends JPanel {
 		
 		userTypeSelectBox.setFont(new Font("Tahoma", Font.BOLD, 13));
 		userTypeSelectBox.setModel(new DefaultComboBoxModel(new String[] {"Resturant Owner", "Customer"}));
-		userTypeSelectBox.setBounds(163, 300, 139, 22);
+		userTypeSelectBox.setBounds(163, 331, 139, 22);
 		this.add(userTypeSelectBox);
 		
 		loginEmailInput.setColumns(10);
@@ -86,7 +87,7 @@ public class LoginView extends JPanel {
 		add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("What are you");
-		lblNewLabel_5.setBounds(65, 305, 88, 14);
+		lblNewLabel_5.setBounds(65, 336, 88, 14);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("HOTFOOD ONLINE");
@@ -94,6 +95,13 @@ public class LoginView extends JPanel {
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setBounds(0, 11, 473, 14);
 		add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Name");
+		lblNewLabel_7.setBounds(65, 303, 46, 14);
+		add(lblNewLabel_7);
+		
+		registerName.setBounds(163, 300, 211, 20);
+		add(registerName);
 		
 	}
 	
@@ -117,6 +125,10 @@ public class LoginView extends JPanel {
 		return this.userTypeSelectBox.getSelectedIndex();
 	}
 	
+	public String getRegisterName() {
+		return this.registerName.getText();
+	}
+	
 	public void addLoginListener(ActionListener listenerForLogin) {
 		this.loginButton.addActionListener(listenerForLogin);
 	}
@@ -128,5 +140,4 @@ public class LoginView extends JPanel {
 	void displayErrorMessage(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
 	}
-	
 }

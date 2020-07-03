@@ -52,7 +52,7 @@ public class LoginController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			loginModel.register( loginView.getRegisterEmail(), loginView.getRegisterPassword(), loginView.getSelectedUserType());	
+			loginModel.register( loginView.getRegisterEmail(), loginView.getRegisterPassword(), loginView.getSelectedUserType(),loginView.getRegisterName());	
 		}
 			
 	}

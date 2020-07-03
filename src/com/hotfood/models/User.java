@@ -7,16 +7,18 @@ public class User implements UserInterface {
 	private String id;
 	private String email;
 	private String password;
+	private String name;
 	private UserType type;
 	
 	public User() {
 		
 	}
 	
-	public User(String id,String email,String password,String userType) {
+	public User(String id,String email,String password,String userType,String name) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
+		this.name = name;
 		this.type = userType == "0" ? UserType.Resturant : UserType.Customer;
 	}
 	
@@ -46,4 +48,7 @@ public class User implements UserInterface {
 		return this.type;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
 }

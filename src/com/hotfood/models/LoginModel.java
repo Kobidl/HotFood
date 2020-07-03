@@ -22,18 +22,19 @@ public class LoginModel {
 		return user;
 	}
 	
-	public boolean register(String e,String p,int type) {
+	public boolean register(String e,String p,int type,String n) {
 		String email = e.trim();
 		String password = p.trim();
+		String name = n.trim();
 		boolean success = false;
-		if(email.isEmpty() || password.isEmpty()) {
+		if(email.isEmpty() || password.isEmpty() || name.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
 		}else {
 			boolean exists = FilesHandler.checkIfUserExistInUsers(email);
 			if(exists) {
 				JOptionPane.showMessageDialog(null,"User already found with this email");
 			}else {
-				success = FilesHandler.createNewUser(email,password,type);
+				success = FilesHandler.createNewUser(email,password,type,name);
 				if(success) {
 					JOptionPane.showMessageDialog(null,"User Created successfully");
 				}else {
