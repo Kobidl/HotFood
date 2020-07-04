@@ -11,17 +11,20 @@ import javax.swing.JPanel;
 
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
+import com.hotfood.controllers.MenuForCustomerController;
 import com.hotfood.controllers.ResturantsController;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
+import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 
 public class MainView extends JFrame {
 
 	LoginView loginPane;
 	ResturantsView resturantsPane;
+	MenuForCustomerView menuForCustomerPane;
 	JLayeredPane layeredPane;
 	Customer customer;
 	
@@ -34,22 +37,23 @@ public class MainView extends JFrame {
 		
 		this.getContentPane().add(layeredPane, BorderLayout.CENTER);
 
-		
-		
 		LoginView loginPane = new LoginView();
 		loginPane.setBounds(0, 0, 546, 498);
+		LoginModel loginModel = new LoginModel();
 		
 		resturantsPane = new ResturantsView();
 		resturantsPane.setBounds(0, 0, 546, 498);
+		ResturantsModel resturantsModel = new ResturantsModel();
 		
-		ResturantsModel resturantsModel = new ResturantsModel(this.customer);
-		LoginModel loginModel = new LoginModel();
-		
+		menuForCustomerPane = new MenuForCustomerView();
+		menuForCustomerPane.setBounds(0, 0, 546, 498);
+		MenuForCustomerModel menuForCustomerModel = new MenuForCustomerModel();
 		
 		MainModel mainModel = new MainModel();
 		
-		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel);
-		MainController mainController = new MainController(this,mainModel,resturantsController); 
+		MenuForCustomerController menuForCustomerController = new MenuForCustomerController(menuForCustomerPane, menuForCustomerModel);
+		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel,menuForCustomerModel);
+		MainController mainController = new MainController(this,mainModel,resturantsPane,resturantsModel); 
 		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 
 		layeredPane.removeAll();
@@ -59,6 +63,7 @@ public class MainView extends JFrame {
 
 	}
 	
+	
 	public void switchWindow(WindowStates state) {
 		layeredPane.removeAll();
 		
@@ -67,13 +72,14 @@ public class MainView extends JFrame {
 			layeredPane.add(loginPane);
 		case Resturants:
 			layeredPane.add(resturantsPane);
+		case MenuForCustomer:
+			layeredPane.add(menuForCustomerPane);
 		default:
 			break;
 		}
 		
 		layeredPane.repaint();
-		layeredPane.revalidate();
-		
+		layeredPane.revalidate();		
 	}
 
 	public void setCustomer(Customer customer) {

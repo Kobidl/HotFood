@@ -33,5 +33,8 @@ public class Menu {
 		}
 		return 0;
 	}
-	 
+	
+	public List<Dish> getDishes(){
+		return this.dishes;
+	}
 }

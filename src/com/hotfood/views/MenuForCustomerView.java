@@ -26,17 +26,18 @@ import javax.swing.JScrollBar;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 
-public class ResturantsView extends JPanel {
+public class MenuForCustomerView extends JPanel {
 	private JTable table;
 	private JButton enterResturantButton;
-
-	public ResturantsView() {
+	JLabel menuHeaderLabel;
+	
+	public MenuForCustomerView() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	
-		JLabel lblNewLabel_6 = new JLabel("Choose Resturant");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNewLabel_6);
+		menuHeaderLabel = new JLabel("Menu");
+		menuHeaderLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		menuHeaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(menuHeaderLabel);
 		
 		table = new JTable();
 		add(table);
@@ -44,7 +45,7 @@ public class ResturantsView extends JPanel {
 	    
 		JScrollPane tableScrollPane = new JScrollPane(table);
 		tableScrollPane.setPreferredSize(new Dimension(500, 300));
-		tableScrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Resturants",
+		tableScrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Menu",
 				TitledBorder.CENTER, TitledBorder.TOP));
 		add(tableScrollPane);
 		
@@ -52,6 +53,10 @@ public class ResturantsView extends JPanel {
 		enterResturantButton.setEnabled(false);
 		this.add(enterResturantButton);
 		
+	}
+	
+	public void setMenuHeaderLabel(String value) {
+		this.menuHeaderLabel.setText(value);
 	}
 	
 	public void addListSectionListener(ListSelectionListener listner) {
@@ -68,9 +73,5 @@ public class ResturantsView extends JPanel {
 	
 	public void addTableModel(TableModel tableModel) {
 		table.setModel(tableModel);
-	}
-	
-	public int getTableSelectedRow() {
-		return table.getSelectedRow();
 	}
 }

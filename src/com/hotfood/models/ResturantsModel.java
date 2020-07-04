@@ -13,8 +13,9 @@ public class ResturantsModel extends DefaultTableModel {
 	private static final Object[] TABLE_HEADER = { "Resturant Name", "Dishes"};
 	private List<Menu> resturants;
 	
-	public ResturantsModel(Customer customer) {
+	public ResturantsModel() {
 		super(DATA,TABLE_HEADER);
+		this.load();
 	}
 	
 	
@@ -30,8 +31,12 @@ public class ResturantsModel extends DefaultTableModel {
 		for (int i = 0; i < this.resturants.size(); i++) {
 			Menu menu = this.resturants.get(i);
 			newData[i] = new Object[]{menu.getResturantName(),menu.getDishesSize()};
-			this.setDataVector(newData, TABLE_HEADER);
 		}
+		this.setDataVector(newData, TABLE_HEADER);
+	}
+	
+	public Menu getMenuAt(int index) {
+		return this.resturants.get(index);
 	}
 
 }
