@@ -10,7 +10,7 @@ import com.hotfood.handlers.FilesHandler;
 public class ResturantsModel extends DefaultTableModel {
 
 	private static final Object[][] DATA = null;
-	private static final Object[] TABLE_HEADER = { "Resturant Name", "Dishes"};
+	private static final Object[] TABLE_HEADER = { "Resturant Name"};
 	private List<Menu> resturants;
 	
 	public ResturantsModel() {
@@ -30,7 +30,7 @@ public class ResturantsModel extends DefaultTableModel {
 		Object[][] newData = new Object[resturants.size()][];
 		for (int i = 0; i < this.resturants.size(); i++) {
 			Menu menu = this.resturants.get(i);
-			newData[i] = new Object[]{menu.getResturantName(),menu.getDishesSize()};
+			newData[i] = new Object[]{menu.getResturantName()};
 		}
 		this.setDataVector(newData, TABLE_HEADER);
 	}

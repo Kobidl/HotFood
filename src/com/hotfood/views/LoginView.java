@@ -3,6 +3,8 @@ package com.hotfood.views;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
@@ -28,7 +30,9 @@ public class LoginView extends JPanel {
 	public LoginView() {
 		setLayout(null);
 		
-
+		this.setBackground(Color.WHITE);
+		this.setBounds(0, 0, 546, 498);
+		
 		loginButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		loginButton.setBounds(173, 164, 112, 25);
 		this.add(loginButton);

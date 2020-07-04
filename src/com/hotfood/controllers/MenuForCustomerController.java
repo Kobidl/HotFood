@@ -12,7 +12,7 @@ import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.MenuForCustomerView;
 import com.hotfood.views.ResturantsView;
 
-public class MenuForCustomerController {
+public class MenuForCustomerController  {
 
 	private MenuForCustomerView menuView;
 	MenuForCustomerModel menuModel;
@@ -20,25 +20,9 @@ public class MenuForCustomerController {
 	public MenuForCustomerController(MenuForCustomerView menuView, MenuForCustomerModel menuModel) {
 		this.menuView = menuView;
 		this.menuModel = menuModel;
-		menuView.addTableModel(menuModel);
+		menuView.addListModel(menuModel);
 	}
 	
-	class ResturantsListListener implements ListSelectionListener{
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			if (!e.getValueIsAdjusting()) {
-			
-			}
-				
-		}
-	}
 	
-	class EnterResturantListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	}
 	
 }

@@ -16,7 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
@@ -25,42 +27,71 @@ import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.hotfood.models.Dish;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JSeparator;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.ScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.Scrollable;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class MenuForCustomerView extends JPanel {
-	private JTable table;
 	private JButton enterResturantButton;
 	JLabel menuHeaderLabel;
+	JList list;
 	
 	public MenuForCustomerView() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		this.setBackground(Color.WHITE);
+
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{451, 72, 0};
+		gridBagLayout.rowHeights = new int[]{14, 17, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		JLabel menuLabel = new JLabel("Menu");
+		menuLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_menuLabel = new GridBagConstraints();
+		gbc_menuLabel.gridwidth = 2;
+		gbc_menuLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_menuLabel.gridx = 0;
+		gbc_menuLabel.gridy = 0;
+		add(menuLabel, gbc_menuLabel);
+		
 	
-		menuHeaderLabel = new JLabel("Menu");
-		menuHeaderLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		menuHeaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(menuHeaderLabel);
+//		DefaultListModel<Dish> listModel = new DefaultListModel<Dish>();
 		
-		table = new JTable();
-		add(table);
+		list = new JList();
+		list.setCellRenderer(new DishRender());
 		
-	    
-		JScrollPane tableScrollPane = new JScrollPane(table);
-		tableScrollPane.setPreferredSize(new Dimension(500, 300));
-		tableScrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Menu",
-				TitledBorder.CENTER, TitledBorder.TOP));
-		add(tableScrollPane);
-		
-		enterResturantButton = new JButton("Enter resturant");
-		enterResturantButton.setEnabled(false);
-		this.add(enterResturantButton);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		JScrollPane scrollPane = new JScrollPane(list);
+		add(scrollPane, gbc);
 		
 	}
 	
 	public void setMenuHeaderLabel(String value) {
 		this.menuHeaderLabel.setText(value);
-	}
-	
-	public void addListSectionListener(ListSelectionListener listner) {
-		table.getSelectionModel().addListSelectionListener(listner);
 	}
 	
 	public void setEnterResturantsEnable(boolean enable) {
@@ -71,7 +102,9 @@ public class MenuForCustomerView extends JPanel {
 		enterResturantButton.addActionListener(listner);
 	}
 	
-	public void addTableModel(TableModel tableModel) {
-		table.setModel(tableModel);
+	public void addListModel(ListModel model) {
+		list.setModel(model);
 	}
 }
+	
+	

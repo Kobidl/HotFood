@@ -43,4 +43,9 @@ public class Dish {
 		return this.price;
 	}
 	
+	@Override
+	public String toString() {
+	    return name;
+	}
+	
 }

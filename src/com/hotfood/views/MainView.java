@@ -1,6 +1,7 @@
 package com.hotfood.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -32,13 +33,12 @@ public class MainView extends JFrame {
 		this.setTitle("HOTFOOD");
 		this.setBounds(100, 100, 546, 498);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		 layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		
 		this.getContentPane().add(layeredPane, BorderLayout.CENTER);
 
 		LoginView loginPane = new LoginView();
-		loginPane.setBounds(0, 0, 546, 498);
+	
 		LoginModel loginModel = new LoginModel();
 		
 		resturantsPane = new ResturantsView();
