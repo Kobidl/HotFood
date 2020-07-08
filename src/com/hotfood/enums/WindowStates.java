@@ -3,5 +3,6 @@ package com.hotfood.enums;
 public enum WindowStates {
 	Login,
 	Resturants,
-	Menu
+	Menu,
+	ResturantOnwer
 }

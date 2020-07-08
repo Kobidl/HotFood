@@ -1,13 +1,9 @@
 package com.hotfood.views;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
@@ -16,38 +12,41 @@ import com.hotfood.enums.WindowStates;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
+import com.hotfood.models.ResturantOwnerModel;
 import com.hotfood.models.ResturantsModel;
 
 public class MainView extends JFrame {
 
 	LoginView loginPane;
+	LoginModel loginModel;
 	ResturantsView resturantsPane;
 	JLayeredPane layeredPane;
 	Customer customer;
+	ResturantOwnerView restaurantOwnerPane;
+	ResturantOwnerModel resturantOwnerModel;
+
+	ResturantsModel resturantsModel;
 	
 	public MainView() {
 		this.setTitle("HOTFOOD");
 		this.setBounds(100, 100, 546, 498);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		 layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		
 		this.getContentPane().add(layeredPane, BorderLayout.CENTER);
 
-		
-		
 		LoginView loginPane = new LoginView();
-		loginPane.setBounds(0, 0, 546, 498);
+		
+		LoginModel loginModel = new LoginModel();
 		
 		resturantsPane = new ResturantsView();
 		resturantsPane.setBounds(0, 0, 546, 498);
 		
-		ResturantsModel resturantsModel = new ResturantsModel(this.customer);
-		LoginModel loginModel = new LoginModel();
+		restaurantOwnerPane = new ResturantOwnerView();
+		restaurantOwnerPane.setBounds(0, 0, 546, 498);
 		
-		
+	
 		MainModel mainModel = new MainModel();
-		
 		MainController mainController = new MainController(this,mainModel,resturantsModel); 
 		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel);
@@ -67,6 +66,9 @@ public class MainView extends JFrame {
 			layeredPane.add(loginPane);
 		case Resturants:
 			layeredPane.add(resturantsPane);
+		case ResturantOnwer:
+			layeredPane.add(restaurantOwnerPane);
+			
 		default:
 			break;
 		}
@@ -78,5 +80,9 @@ public class MainView extends JFrame {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public void setRestaurantOwnerPane() {
+		this.restaurantOwnerPane = new  ResturantOwnerView();
 	}
 }

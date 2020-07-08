@@ -23,7 +23,7 @@ public class Restaurant extends User {
 		return this.arrivalTime;
 	}
 	
-	public void editArrivalTime(date time) {
+	public void editArrivalTime(Date time) {
 		
 	}
 }

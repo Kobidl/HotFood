@@ -9,7 +9,7 @@ public class Menu {
 	
 	
 	public Menu(String id,Restaurant restaurant ) {
-		this.id = id;
+		this.setId(id);
 		this.restaurant = restaurant;
 
 }
@@ -29,6 +29,12 @@ public class Menu {
 	public void deleteDish(Dish dish) 
 	{
 		
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }
