@@ -15,7 +15,7 @@ import com.hotfood.models.User;
 public class FilesHandler {
 	private final static String spliter = ",";
 
-	private final static String path = "data/users.csv";
+	private final static String path = "C:\\Users\\koral\\git\\HotFood\\data\\users.csv";
 	private final static String cartsPath = "data/carts.csv";
 	
 	
@@ -97,6 +97,10 @@ public class FilesHandler {
 		    
 		}
 
+		
+	}
+	
+	public static void uploadMenuFile(File fileMenu) {
 		
 	}
 
