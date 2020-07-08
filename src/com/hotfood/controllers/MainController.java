@@ -2,15 +2,19 @@ package com.hotfood.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.Customer;
 import com.hotfood.models.MainModel;
+import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.MainView;
+import com.hotfood.views.MenuForCustomerView;
 import com.hotfood.views.ResturantsView;
 
-public class MainController {
+public class MainController implements Observer {
 
 	private MainView mainView;
 	private MainModel mainModel;
@@ -24,19 +28,25 @@ public class MainController {
 	}
 	
 	
-	public void switchWindowToResturants(Customer customer) {
-		this.mainView.setCustomer(customer);
+	public void switchWindowToResturants() {
 		resturantsModel.load();
 		this.mainView.switchWindow(WindowStates.Resturants);
 	}
 	
 	class EnterResturantListener implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mainView.switchWindow(WindowStates.MenuForCustomer);
 		}
+	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o instanceof MainModel) {
+			if(arg == WindowStates.Resturants) {
+				switchWindowToResturants();
+			}
+		}
 	}
 
 }

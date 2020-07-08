@@ -50,13 +50,16 @@ public class MainView extends JFrame {
 		MenuForCustomerModel menuForCustomerModel = new MenuForCustomerModel();
 		
 		MainModel mainModel = new MainModel();
+		MainController mainController = new MainController(this,mainModel,resturantsPane,resturantsModel);
 		
-		menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel);
+		menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
 		((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
 		((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);
 		
 		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel,menuForCustomerController);
-		MainController mainController = new MainController(this,mainModel,resturantsPane,resturantsModel); 
+ 
+		((MainModel) mainModel).addObserver(mainController);
+		
 		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 
 		layeredPane.removeAll();

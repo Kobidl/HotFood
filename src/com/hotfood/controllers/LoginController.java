@@ -37,8 +37,8 @@ public class LoginController {
 		public void actionPerformed(ActionEvent e) {
 			User user = loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
 			if(user!=null && user.getType() == UserType.Customer) {
-				Customer customer = new Customer(user);
-				mainController.switchWindowToResturants(customer);
+				//Customer customer = new Customer(user);
+				mainController.switchWindowToResturants();
 			}
 			if(user!=null && user.getType() == UserType.Resturant) {
 //				Resturant resturant = new Resturant(user);

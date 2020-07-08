@@ -61,8 +61,9 @@ import java.awt.Point;
 public class MenuForCustomerView extends Observable{
 	private JPanel menu;
 	private JPanel innerPanel;
-	private JLabel menuHeaderLabel;
 	private JScrollPane scroller;
+	private JLabel menuHeaderLabel;
+	private JButton backButton;
 	
 	public MenuForCustomerView() {
 		menu = new JPanel();
@@ -77,21 +78,35 @@ public class MenuForCustomerView extends Observable{
 		scroller = new JScrollPane( innerPanel );
 		GridBagLayout gbl_innerPanel = new GridBagLayout();
 		gbl_innerPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_innerPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_innerPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_innerPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_innerPanel.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_innerPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		innerPanel.setLayout(gbl_innerPanel);
 		
-		scroller.setBounds(10, 5, 512, 430);
+		scroller.setBounds(10, 22, 512, 413);
 		scroller.getViewport().setViewPosition(new Point(0,0));
 
 		menu.add(scroller);
+		
+		menuHeaderLabel = new JLabel("Menu");
+		menuHeaderLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		menuHeaderLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		menuHeaderLabel.setBounds(99, 0, 411, 22);
+		menu.add(menuHeaderLabel);
+		
+		backButton = new JButton("Back");
+		backButton.setBounds(10, 0, 79, 22);
+		menu.add(backButton);
 		menu.setVisible(true);
 		
 	}
 	
 	public JPanel getMenu() {
 		return this.menu;
+	}
+	
+	public void setHeader(String value) {
+		menuHeaderLabel.setText(value);
 	}
 
 	public void addDishes(List<Dish> dishes) {
@@ -128,6 +143,9 @@ public class MenuForCustomerView extends Observable{
 		notifyObservers(selected);
 	}
 	
+	public void addBackButtonListener(ActionListener listener) {
+		this.backButton.addActionListener(listener);
+	}
 }
 	
 	
