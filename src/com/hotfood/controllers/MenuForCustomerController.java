@@ -1,28 +1,35 @@
 package com.hotfood.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
-import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.MenuForCustomerView;
-import com.hotfood.views.ResturantsView;
 
-public class MenuForCustomerController  {
+public class MenuForCustomerController implements Observer  {
 
 	private MenuForCustomerView menuView;
-	MenuForCustomerModel menuModel;
+	private MenuForCustomerModel menuModel;
 	
 	public MenuForCustomerController(MenuForCustomerView menuView, MenuForCustomerModel menuModel) {
 		this.menuView = menuView;
 		this.menuModel = menuModel;
-		menuView.addListModel(menuModel);
 	}
 	
-	
+	public void init(Menu menu) {
+		menuModel.init(menu);
+		menuView.addDishes(menu.getDishes());
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o instanceof MenuForCustomerView) {
+			((MenuForCustomerModel)menuModel).addItem();;
+		}else if(o instanceof MenuForCustomerModel){
+			
+		}
+	}
 	
 }

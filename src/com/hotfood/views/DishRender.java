@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -24,34 +25,41 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Font;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
-public class DishRender extends JLabel implements ListCellRenderer<Dish> {
-	private JPanel panel;
+public class DishRender extends JPanel implements ActionListener {
+	private int index;
 	JLabel nameLabel;
 	JLabel priceLabel;
-	JLabel descriptionLabel;
-	private JSeparator separator;
+	private JTextArea textArea;
+	private JButton btnNewButton;
+	MenuForCustomerView dishesView;
+	private JComboBox comboBox;
+	private JLabel lblNewLabel;
 	
-	public DishRender() {
-		
-	}
-	 
-    @Override
-    public Component getListCellRendererComponent(JList<? extends Dish> list, Dish dish, int index,
-        boolean isSelected, boolean cellHasFocus) {
-    	panel = new JPanel();
+	public DishRender(int index,Dish dish,MenuForCustomerView dishesView) {
+		this.dishesView = dishesView;
+//		this.setBounds(0, 0, 546, 498);
+		this.index = index;
+		JPanel panel = this;
     	panel.setBackground(Color.white);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{46, 243, 0, 0, 72, 0};
-		gbl_panel.rowHeights = new int[]{14, 19, 32, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{46, 126, 131, 0, 72, 0};
+		gbl_panel.rowHeights = new int[]{14, 19, 32, 30, 47};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
 		panel.setLayout(gbl_panel);
 		
 		JLabel nameLabel = new JLabel("name");
 		nameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_nameLabel = new GridBagConstraints();
+		gbc_nameLabel.gridwidth = 2;
 		gbc_nameLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_nameLabel.anchor = GridBagConstraints.NORTHWEST;
 		gbc_nameLabel.gridx = 1;
@@ -67,30 +75,60 @@ public class DishRender extends JLabel implements ListCellRenderer<Dish> {
 		gbc_priceLabel.gridy = 1;
 		panel.add(priceLabel, gbc_priceLabel);
 		
-		descriptionLabel = new JLabel("description");
-		descriptionLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_descriptionLabel = new GridBagConstraints();
-		gbc_descriptionLabel.fill = GridBagConstraints.BOTH;
-		gbc_descriptionLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_descriptionLabel.gridx = 1;
-		gbc_descriptionLabel.gridy = 2;
-		panel.add(descriptionLabel, gbc_descriptionLabel);
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setWrapStyleWord(true);
+		textArea.setRows(3);
+		textArea.setLineWrap(true);
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.gridwidth = 4;
+		gbc_textArea.insets = new Insets(0, 0, 5, 0);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 2;
+		panel.add(textArea, gbc_textArea);
 		
-		separator = new JSeparator();
-		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.gridwidth = 4;
-		gbc_separator.fill = GridBagConstraints.HORIZONTAL;
-		gbc_separator.insets = new Insets(0, 0, 0, 5);
-		gbc_separator.gridx = 1;
-		gbc_separator.gridy = 3;
-		panel.add(separator, gbc_separator);
+		
+		
+		btnNewButton = new JButton("Add to cart");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridwidth = 2;
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 4;
+		btnNewButton.addActionListener(this);
+		
+		lblNewLabel = new JLabel("Choose option");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 3;
+		add(lblNewLabel, gbc_lblNewLabel);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(dish.getOptions()));
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 2;
+		gbc_comboBox.gridy = 3;
+		add(comboBox, gbc_comboBox);
+		panel.add(btnNewButton, gbc_btnNewButton);
+		
     	nameLabel.setText(dish.getName());
     	priceLabel.setText(String.valueOf(dish.getPrice()) + "$");
-    	descriptionLabel.setText(dish.getDescription());
-        
-        return panel;
-         
-//        return this;
-    }
+    	textArea.setText(dish.getDescription());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		int selectedOption = comboBox.getSelectedIndex();
+		dishesView.addDish(this.index,selectedOption);
+	}
+	 
+ 
      
 }

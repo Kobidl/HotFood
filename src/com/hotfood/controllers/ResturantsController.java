@@ -2,6 +2,8 @@ package com.hotfood.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLayeredPane;
 import javax.swing.event.ListSelectionEvent;
@@ -13,17 +15,17 @@ import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.ResturantsView;
 
-public class ResturantsController {
+public class ResturantsController implements Observer {
 
 	private ResturantsView resturantsView;
 	ResturantsModel resturantsModel;
-	MenuForCustomerModel menuForCustomerModel;
+	MenuForCustomerController menuForCustomerController;
 	
 	
-	public ResturantsController(ResturantsView resturantsPane, ResturantsModel resturantsModel, MenuForCustomerModel menuForCustomerModel) {
+	public ResturantsController(ResturantsView resturantsPane, ResturantsModel resturantsModel, MenuForCustomerController menuForCustomerController) {
 		this.resturantsView = resturantsPane;
 		this.resturantsModel = resturantsModel;
-		this.menuForCustomerModel = menuForCustomerModel;
+		this.menuForCustomerController = menuForCustomerController;
 		resturantsPane.addEnterResturantListener(new EnterResturantListener());
 		this.init();
 	}
@@ -48,9 +50,15 @@ public class ResturantsController {
 		public void actionPerformed(ActionEvent e) {
 			int selectedRow = resturantsView.getTableSelectedRow();
 			Menu menu = resturantsModel.getMenuAt(selectedRow);
-			menuForCustomerModel.init(menu);
+			menuForCustomerController.init(menu);
 		}
 
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		
+		
 	}
 	
 	

@@ -8,6 +8,11 @@ import javax.swing.JCheckBox;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JTextField;
 
@@ -42,6 +47,8 @@ import java.awt.ScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.JTextArea;
 import java.awt.Color;
@@ -49,62 +56,78 @@ import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Point;
 
-public class MenuForCustomerView extends JPanel {
-	private JButton enterResturantButton;
-	JLabel menuHeaderLabel;
-	JList list;
+public class MenuForCustomerView extends Observable{
+	private JPanel menu;
+	private JPanel innerPanel;
+	private JLabel menuHeaderLabel;
+	private JScrollPane scroller;
 	
 	public MenuForCustomerView() {
-		this.setBackground(Color.WHITE);
+		menu = new JPanel();
+		menu.setBounds(0, 0, 546, 498);;
+		menu.setBackground(Color.WHITE);
+		innerPanel = new JPanel();
+//		innerPanel.setBounds(0, 0, 546, 498);
+		innerPanel.setVisible(true);
+	    
+		menu.setLayout(null);
 
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{451, 72, 0};
-		gridBagLayout.rowHeights = new int[]{14, 17, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		scroller = new JScrollPane( innerPanel );
+		GridBagLayout gbl_innerPanel = new GridBagLayout();
+		gbl_innerPanel.columnWidths = new int[]{0, 0, 0};
+		gbl_innerPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_innerPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_innerPanel.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		innerPanel.setLayout(gbl_innerPanel);
 		
-		JLabel menuLabel = new JLabel("Menu");
-		menuLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_menuLabel = new GridBagConstraints();
-		gbc_menuLabel.gridwidth = 2;
-		gbc_menuLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_menuLabel.gridx = 0;
-		gbc_menuLabel.gridy = 0;
-		add(menuLabel, gbc_menuLabel);
-		
-	
-//		DefaultListModel<Dish> listModel = new DefaultListModel<Dish>();
-		
-		list = new JList();
-		list.setCellRenderer(new DishRender());
-		
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridwidth = 2;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		JScrollPane scrollPane = new JScrollPane(list);
-		add(scrollPane, gbc);
+		scroller.setBounds(10, 5, 512, 430);
+		scroller.getViewport().setViewPosition(new Point(0,0));
+
+		menu.add(scroller);
+		menu.setVisible(true);
 		
 	}
 	
-	public void setMenuHeaderLabel(String value) {
-		this.menuHeaderLabel.setText(value);
+	public JPanel getMenu() {
+		return this.menu;
+	}
+
+	public void addDishes(List<Dish> dishes) {
+		this.scroller.setVisible(false);
+		this.innerPanel.removeAll();
+		for(int i=0;i<dishes.size();i++) {
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 0);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 1;
+			gbc_panel.gridy = i+1;
+			this.innerPanel.add(new DishRender(i,dishes.get(i),this),gbc_panel);
+		}
+		
+		this.innerPanel.repaint();
+		this.innerPanel.revalidate();
+
+		Thread scrollTop=new Thread(){
+	          public void run() {
+	              try{
+	                  Thread.sleep(200);
+	                  scroller.setVisible(true);
+	                  scroller.getViewport().setViewPosition( new Point(0, 0) );
+	              } catch(InterruptedException v){System.out.println(v);}
+	          }
+	      };
+	      scrollTop.start();
+	}
+
+	
+	public void addDish(int index, int selectedOption) {
+		setChanged();
+		int[] selected = new int[] {index,selectedOption};
+		notifyObservers(selected);
 	}
 	
-	public void setEnterResturantsEnable(boolean enable) {
-		enterResturantButton.setEnabled(enable);
-	}
-	
-	public void addEnterResturantListener(ActionListener listner) {
-		enterResturantButton.addActionListener(listner);
-	}
-	
-	public void addListModel(ListModel model) {
-		list.setModel(model);
-	}
 }
 	
 	

@@ -25,9 +25,10 @@ public class MainView extends JFrame {
 
 	LoginView loginPane;
 	ResturantsView resturantsPane;
-	MenuForCustomerView menuForCustomerPane;
+	MenuForCustomerView menuForCustomerPanel;
 	JLayeredPane layeredPane;
 	Customer customer;
+	MenuForCustomerController menuForCustomerController;
 	
 	public MainView() {
 		this.setTitle("HOTFOOD");
@@ -45,14 +46,16 @@ public class MainView extends JFrame {
 		resturantsPane.setBounds(0, 0, 546, 498);
 		ResturantsModel resturantsModel = new ResturantsModel();
 		
-		menuForCustomerPane = new MenuForCustomerView();
-		menuForCustomerPane.setBounds(0, 0, 546, 498);
+		menuForCustomerPanel = new MenuForCustomerView();
 		MenuForCustomerModel menuForCustomerModel = new MenuForCustomerModel();
 		
 		MainModel mainModel = new MainModel();
 		
-		MenuForCustomerController menuForCustomerController = new MenuForCustomerController(menuForCustomerPane, menuForCustomerModel);
-		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel,menuForCustomerModel);
+		menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel);
+		((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
+		((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);
+		
+		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel,menuForCustomerController);
 		MainController mainController = new MainController(this,mainModel,resturantsPane,resturantsModel); 
 		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
 
@@ -68,14 +71,17 @@ public class MainView extends JFrame {
 		layeredPane.removeAll();
 		
 		switch(state) {
-		case Login:
-			layeredPane.add(loginPane);
-		case Resturants:
-			layeredPane.add(resturantsPane);
-		case MenuForCustomer:
-			layeredPane.add(menuForCustomerPane);
-		default:
-			break;
+			case Login:
+				layeredPane.add(loginPane);
+				break;
+			case Resturants:
+				layeredPane.add(resturantsPane);
+				break;
+			case MenuForCustomer:
+				layeredPane.add(menuForCustomerPanel.getMenu());
+				break;
+			default:
+				break;
 		}
 		
 		layeredPane.repaint();
