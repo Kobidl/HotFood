@@ -60,8 +60,25 @@ public class CustomerMenuTests {
 		userId = UUID.randomUUID().toString();
 		menuForCus.addItem(0, 0, userId);
 		
-		List<DishInCart> cart =  FilesHandler.getCartData(userId);
+		List<DishInCart> cart = FilesHandler.getCartData(userId);
 		assertTrue("Failed to find user cart data", cart.size() == 1);
+	}
+	
+	@Test
+	public void checkHalfEmptyOptions() {
+		String resturantId = UUID.randomUUID().toString();
+		String resturantName = resName;
+		List<Dish> dishes = new ArrayList<Dish>() {};
+		String[] options = new String[] {"test1","test2","",""};
+
+		String dishId = UUID.randomUUID().toString();
+		Dish dish = new Dish(dishId,"Dish test","Dish for testing",options,10.4);
+		dishes.add(dish);
+
+		Menu menu = new Menu(resturantId, resturantName, dishes);
+		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
+		String[] cleanOptions = menuForCus.getDishes().get(0).cleanOptions();
+		assertEquals("Something wrong with cleaning the filters",2, cleanOptions.length);
 	}
 	
 }
