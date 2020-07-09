@@ -1,6 +1,7 @@
 package com.hotfood.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Dish {
@@ -67,6 +68,16 @@ public class Dish {
 	    }
 	    values.add(String.valueOf(price));
 	    return String.join(",", values);
+	}
+
+	public String[] cleanOptions() {
+		List<String> list = new ArrayList<String>();
+		for(int i=0;i<this.options.length;i++) {
+			if(!this.options[i].isEmpty()) {
+				list.add(this.options[i]);
+			}
+		}
+		return list.stream().toArray(String[]::new);
 	}
 	
 }

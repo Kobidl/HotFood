@@ -24,23 +24,24 @@ import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class MainView extends JFrame {
 
-	LoginView loginPane;
-	ResturantsView resturantsPanel;
-	MenuForCustomerView menuForCustomerPanel;
 	JLayeredPane layeredPane;
-	Customer customer;
-	MenuForCustomerController menuForCustomerController;
 	MainModel mainModel;
 	JButton cartButton;
-	MenuForCustomerModel menuForCustomerModel;
+	JButton backButton;
+	JLabel headerLabel;
 	
 	public MainView() {
+		setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
 		this.setTitle("HOTFOOD");
-		this.setBounds(100, 100, 546, 498);
+		this.setBounds(100, 100, 547, 574);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBackground(Color.white);
 		layeredPane = new JLayeredPane();
@@ -49,31 +50,23 @@ public class MainView extends JFrame {
 		cartButton.setBounds(430, 15, 89, 23);
 		
 		this.getContentPane().add(layeredPane, BorderLayout.CENTER);
-
-		LoginView loginPane = new LoginView();
-	
-		LoginModel loginModel = new LoginModel();
 		
-		resturantsPanel = new ResturantsView();
-
-		ResturantsModel resturantsModel = new ResturantsModel();
+		backButton = new JButton("Back");
+		backButton.setBounds(10, 15, 89, 23);
+		
+		headerLabel = new JLabel("HotFood");
+		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		headerLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		headerLabel.setBounds(191, 17, 160, 21);
 				
 		mainModel = new MainModel();
-		MainController mainController = new MainController(this,mainModel,resturantsPanel,resturantsModel);
-	
-		
-		ResturantsController resturantsController = new ResturantsController(resturantsPanel,resturantsModel,mainModel);
-		
+		MainController mainController = new MainController(this,mainModel);
 		
 		((MainModel) mainModel).addObserver(mainController);
 		
-		LoginController loginController = new LoginController(loginPane,loginModel,mainModel);
-
-		layeredPane.removeAll();
-		layeredPane.add(loginPane);
-		
-		layeredPane.repaint();
-		layeredPane.revalidate();
+		layeredPane.add(backButton);
+		layeredPane.add(cartButton);
+		//layeredPane.add(headerLabel);
 
 	}
 	
@@ -83,22 +76,24 @@ public class MainView extends JFrame {
 		
 		switch(state) {
 			case Login:
+				LoginView loginPane = new LoginView();
+				LoginModel loginModel = new LoginModel();
 				layeredPane.add(loginPane);
+				LoginController loginController = new LoginController(loginPane,loginModel,mainModel);
 				break;
 			case Resturants:
+				ResturantsView resturantsPanel = new ResturantsView();
 				layeredPane.add(resturantsPanel.getView());
-				printHeader();
+				ResturantsModel resturantsModel = new ResturantsModel();
+				ResturantsController resturantsController = new ResturantsController(resturantsPanel,resturantsModel,mainModel);
 				break;
 			case MenuForCustomer:
-				menuForCustomerModel = new MenuForCustomerModel((Menu)arg);
-				menuForCustomerPanel = new MenuForCustomerView();
-				
-				menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
-				
+				MenuForCustomerModel menuForCustomerModel = new MenuForCustomerModel((Menu)arg);
+				MenuForCustomerView menuForCustomerPanel = new MenuForCustomerView();
+				MenuForCustomerController menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
 				((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);				
 				((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
 				layeredPane.add(menuForCustomerPanel.getMenu());
-				printHeader();
 				break;
 			case Cart:
 				CartView cartView = new CartView();
@@ -111,21 +106,28 @@ public class MainView extends JFrame {
 			default:
 				break;
 		}
-		
+		printHeader(state);
 		layeredPane.repaint();
 		layeredPane.revalidate();		
 	}
 
-	public void printHeader() {
-		
-		layeredPane.add(cartButton);
-	}
-	
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void printHeader(WindowStates state) {
+		layeredPane.add(headerLabel);
+		if(state!= WindowStates.Login) {
+			if(state != WindowStates.Cart) {
+				layeredPane.add(cartButton);
+			}
+			if(state != WindowStates.Resturants) {
+				layeredPane.add(backButton);
+			}
+		}
 	}
 	
 	public void addCartListener(ActionListener listener) {
 		cartButton.addActionListener(listener);
+	}
+	
+	public void addBackButtonListener(ActionListener listener) {
+		backButton.addActionListener(listener);
 	}
 }

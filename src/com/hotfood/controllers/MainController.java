@@ -19,20 +19,15 @@ public class MainController implements Observer {
 
 	private MainView mainView;
 	private MainModel mainModel;
-	private ResturantsModel resturantsModel;
 	
-	public MainController(MainView mainView, MainModel mainModel, ResturantsView resturantsView, ResturantsModel resturantsModel) {
+	public MainController(MainView mainView, MainModel mainModel) {
 		this.mainView = mainView;
 		this.mainModel = mainModel;
-		this.resturantsModel = resturantsModel;
 		mainView.addCartListener(new GotoCartListener());
+		mainView.addBackButtonListener(new BackListener());
+		this.mainView.switchWindow(WindowStates.Login,null);
 	}
 	
-	
-	public void switchWindowToResturants() {
-		resturantsModel.load();
-		this.mainView.switchWindow(WindowStates.Resturants,null);
-	}
 	
 	class GotoCartListener implements ActionListener{
 		@Override
@@ -41,11 +36,19 @@ public class MainController implements Observer {
 		}
 	}
 	
+	class BackListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mainModel.goBack();
+		}
+	}
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof MainModel) {
 			if(arg == WindowStates.Resturants) {
-				switchWindowToResturants();
+				this.mainView.switchWindow(WindowStates.Resturants,null);
 			}
 			if(arg == WindowStates.Cart) {
 				this.mainView.switchWindow(WindowStates.Cart,null);

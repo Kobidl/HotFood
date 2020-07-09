@@ -21,7 +21,6 @@ public class MenuForCustomerController implements Observer  {
 		this.menuView = menuView;
 		this.menuModel = menuModel;
 		this.mainModel = mainModel;
-		this.menuView.addBackButtonListener(new BackListener());
 		init();
 	}
 	
@@ -43,14 +42,4 @@ public class MenuForCustomerController implements Observer  {
 			}
 		}
 	}
-	
-	class BackListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainModel.goBack();
-		}
-
-	}
-	
 }

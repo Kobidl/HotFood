@@ -22,7 +22,6 @@ public class CartController implements Observer  {
 		this.view = view;
 		this.model = model;
 		this.mainModel = mainModel;
-		view.addBackButtonListener(new BackListener());
 		init();
 	}
 	
@@ -40,15 +39,6 @@ public class CartController implements Observer  {
 		}else if(o instanceof CartModel) {
 			view.printItems(model.getDishes());
 		}
-	}
-	
-	class BackListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainModel.goBack();
-		}
-
 	}
 	
 }

@@ -34,77 +34,77 @@ public class LoginView extends JPanel {
 		this.setBounds(0, 0, 546, 498);
 		
 		loginButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		loginButton.setBounds(173, 164, 112, 25);
+		loginButton.setBounds(197, 162, 133, 25);
 		this.add(loginButton);
 		
 		registerButton.setToolTipText("click here to register as a new user");
 		registerButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		registerButton.setBounds(173, 374, 133, 25);
+		registerButton.setBounds(197, 379, 133, 25);
 		this.add(registerButton);
 		
 		registerPasswordInput.setToolTipText("Enter your passwrd");
-		registerPasswordInput.setBounds(163, 269, 211, 20);
+		registerPasswordInput.setBounds(171, 272, 211, 20);
 		this.add(registerPasswordInput);
 		
-		registerEmailInput.setBounds(163, 238, 211, 20);
+		registerEmailInput.setBounds(171, 241, 211, 20);
 		this.add(registerEmailInput);
 		registerEmailInput.setColumns(10);
 		
 		
 		userTypeSelectBox.setFont(new Font("Tahoma", Font.BOLD, 13));
 		userTypeSelectBox.setModel(new DefaultComboBoxModel(new String[] {"Resturant Owner", "Customer"}));
-		userTypeSelectBox.setBounds(163, 331, 139, 22);
+		userTypeSelectBox.setBounds(171, 334, 139, 22);
 		this.add(userTypeSelectBox);
 		
 		loginEmailInput.setColumns(10);
-		loginEmailInput.setBounds(163, 91, 211, 20);
+		loginEmailInput.setBounds(171, 94, 211, 20);
 		this.add(loginEmailInput);
 		
 		loginPasswordInput.setToolTipText("Enter your passwrd");
-		loginPasswordInput.setBounds(163, 128, 211, 20);
+		loginPasswordInput.setBounds(171, 131, 211, 20);
 		this.add(loginPasswordInput);
 		
 		JLabel lblNewLabel = new JLabel("Are you existed user?");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(169, 65, 133, 15);
+		lblNewLabel.setBounds(197, 63, 133, 15);
 		this.add(lblNewLabel);
 		
 		JLabel lblRegisterHereFor = new JLabel("Register here for creating user new user");
 		lblRegisterHereFor.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblRegisterHereFor.setBounds(106, 200, 248, 15);
+		lblRegisterHereFor.setBounds(114, 203, 248, 15);
 		this.add(lblRegisterHereFor);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setBounds(65, 94, 88, 14);
+		lblNewLabel_1.setBounds(73, 97, 88, 14);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password");
-		lblNewLabel_2.setBounds(65, 133, 88, 14);
+		lblNewLabel_2.setBounds(73, 136, 88, 14);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Email");
-		lblNewLabel_3.setBounds(65, 241, 88, 14);
+		lblNewLabel_3.setBounds(73, 244, 88, 14);
 		add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Password");
-		lblNewLabel_4.setBounds(65, 272, 88, 14);
+		lblNewLabel_4.setBounds(73, 275, 88, 14);
 		add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("What are you");
-		lblNewLabel_5.setBounds(65, 336, 88, 14);
+		lblNewLabel_5.setBounds(73, 339, 88, 14);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("HOTFOOD ONLINE");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(0, 11, 473, 14);
+		lblNewLabel_6.setBounds(0, 11, 536, 14);
 		add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Name");
-		lblNewLabel_7.setBounds(65, 303, 46, 14);
+		lblNewLabel_7.setBounds(73, 306, 46, 14);
 		add(lblNewLabel_7);
 		
-		registerName.setBounds(163, 300, 211, 20);
+		registerName.setBounds(171, 303, 211, 20);
 		add(registerName);
 		
 	}

@@ -64,11 +64,10 @@ public class CartView extends Observable{
 	private JPanel innerPanel;
 	private JScrollPane scroller;
 	private JLabel menuHeaderLabel;
-	private JButton backButton;
 	
 	public CartView() {
 		menu = new JPanel();
-		menu.setBounds(0, 0, 546, 498);;
+		menu.setBounds(0, 50, 546, 520);
 		menu.setBackground(Color.WHITE);
 		innerPanel = new JPanel();
 		innerPanel.setBackground(Color.WHITE);
@@ -85,10 +84,11 @@ public class CartView extends Observable{
 		gbl_innerPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		innerPanel.setLayout(gbl_innerPanel);
 		
-		scroller.setBounds(10, 22, 512, 413);
+		scroller.setBounds(10, 22, 512, 460);
 		scroller.getViewport().setViewPosition(new Point(0,0));
 		scroller.setVisible(false);
-
+		scroller.getVerticalScrollBar().setUnitIncrement(16);
+		
 		menu.add(scroller);
 		
 		menuHeaderLabel = new JLabel("Cart");
@@ -96,11 +96,6 @@ public class CartView extends Observable{
 		menuHeaderLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		menuHeaderLabel.setBounds(197, 0, 148, 19);
 		menu.add(menuHeaderLabel);
-		
-		backButton = new JButton("Back");
-		backButton.setBounds(10, 0, 79, 22);
-		menu.add(backButton);
-		menu.setVisible(true);
 		
 	}
 	
@@ -139,13 +134,7 @@ public class CartView extends Observable{
 		}
 	}
 	
-	public void addBackButtonListener(ActionListener listener) {
-		this.backButton.addActionListener(listener);
-	}
-
 	public void removeItem(int index) {
-//		this.innerPanel.remove(index);
-//		this.innerPanel.repaint();
 		setChanged();
 		notifyObservers(index);
 	}

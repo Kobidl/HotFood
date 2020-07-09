@@ -37,15 +37,17 @@ public class ResturantsView extends Observable {
 	public ResturantsView() {
 		panel = new JPanel();
 		panel.setBounds(0, 40, 546, 498);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.setBackground(Color.WHITE);
+		panel.setLayout(null);
 
 		JLabel lblNewLabel_6 = new JLabel("Choose Resturant");
+		lblNewLabel_6.setBounds(192, 5, 161, 22);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel_6);
 		
 		table = new JTable();
+		table.setBounds(6, 16, 488, 0);
 		table.setRowMargin(5);
 		table.setRowHeight(25);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -57,6 +59,7 @@ public class ResturantsView extends Observable {
 		table.setBackground(Color.white);
 	    
 		JScrollPane tableScrollPane = new JScrollPane(table);
+		tableScrollPane.setBounds(23, 32, 500, 355);
 		tableScrollPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tableScrollPane.setPreferredSize(new Dimension(500, 300));
 		tableScrollPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Resturants",
@@ -66,6 +69,8 @@ public class ResturantsView extends Observable {
 		panel.add(tableScrollPane);
 		
 		enterResturantButton = new JButton("Enter resturant");
+		enterResturantButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		enterResturantButton.setBounds(192, 410, 171, 29);
 		enterResturantButton.setEnabled(false);
 		panel.add(enterResturantButton);
 		

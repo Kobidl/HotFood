@@ -50,9 +50,9 @@ public class DishRender extends JPanel implements ActionListener {
 		JPanel panel = this;
     	panel.setBackground(Color.white);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{46, 126, 131, 0, 72, 0};
+		gbl_panel.columnWidths = new int[]{72, 126, 168, 74, 72, 0};
 		gbl_panel.rowHeights = new int[]{14, 19, 32, 30, 47};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
 		panel.setLayout(gbl_panel);
 		
@@ -70,8 +70,9 @@ public class DishRender extends JPanel implements ActionListener {
 		priceLabel = new JLabel("price");
 		priceLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_priceLabel = new GridBagConstraints();
+		gbc_priceLabel.gridwidth = 2;
 		gbc_priceLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_priceLabel.gridx = 4;
+		gbc_priceLabel.gridx = 3;
 		gbc_priceLabel.gridy = 1;
 		panel.add(priceLabel, gbc_priceLabel);
 		
@@ -88,11 +89,10 @@ public class DishRender extends JPanel implements ActionListener {
 		gbc_textArea.gridy = 2;
 		panel.add(textArea, gbc_textArea);
 		
-		
-		
 		btnNewButton = new JButton("Add to cart");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 2;
+		gbc_btnNewButton.gridwidth = 3;
 		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 1;
@@ -109,7 +109,7 @@ public class DishRender extends JPanel implements ActionListener {
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(dish.getOptions()));
+		comboBox.setModel(new DefaultComboBoxModel(dish.cleanOptions()));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
