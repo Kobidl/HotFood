@@ -8,6 +8,7 @@ import java.util.Observer;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.Customer;
 import com.hotfood.models.MainModel;
+import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.MainView;
@@ -24,23 +25,15 @@ public class MainController implements Observer {
 		this.mainView = mainView;
 		this.mainModel = mainModel;
 		this.resturantsModel = resturantsModel;
-		resturantsView.addEnterResturantListener(new EnterResturantListener());
 		mainView.addCartListener(new GotoCartListener());
 	}
 	
 	
 	public void switchWindowToResturants() {
 		resturantsModel.load();
-		this.mainView.switchWindow(WindowStates.Resturants);
+		this.mainView.switchWindow(WindowStates.Resturants,null);
 	}
 	
-	class EnterResturantListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainView.switchWindow(WindowStates.MenuForCustomer);
-		}
-	}
-
 	class GotoCartListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -55,13 +48,12 @@ public class MainController implements Observer {
 				switchWindowToResturants();
 			}
 			if(arg == WindowStates.Cart) {
-				this.mainView.switchWindow(WindowStates.Cart);
+				this.mainView.switchWindow(WindowStates.Cart,null);
+			}
+			if(arg instanceof Menu ) {
+				this.mainView.switchWindow(WindowStates.MenuForCustomer,arg);
 			}
 		}
-	}
-
-	public void setUser(Customer customer) {
-		this.mainModel.setUser(customer);
 	}
 
 }

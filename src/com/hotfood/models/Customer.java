@@ -26,4 +26,8 @@ public class Customer extends User {
 	public List<DishInCart> getCart(){
 		return this.cart;
 	}
+
+	public void addDishToCart(DishInCart dish) {
+		this.cart.add(dish);
+	}
 }

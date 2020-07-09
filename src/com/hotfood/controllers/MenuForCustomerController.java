@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.hotfood.models.DishInCart;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
@@ -21,12 +22,12 @@ public class MenuForCustomerController implements Observer  {
 		this.menuModel = menuModel;
 		this.mainModel = mainModel;
 		this.menuView.addBackButtonListener(new BackListener());
+		init();
 	}
 	
-	public void init(Menu menu) {
-		menuModel.init(menu);
-		menuView.setHeader(menu.getResturantName() + " - Menu");
-		menuView.addDishes(menu.getDishes());
+	public void init() {
+		menuView.setHeader(menuModel.getResturantName() + " - Menu");
+		menuView.addDishes(menuModel.getDishes());
 	}
 
 	@Override
@@ -34,10 +35,12 @@ public class MenuForCustomerController implements Observer  {
 		if(o instanceof MenuForCustomerView) {
 			if(arg instanceof int[]) {
 				int [] value = (int[])arg;
-				((MenuForCustomerModel)menuModel).addItem(value[0],value[1],mainModel.getCustomerId());;
+				((MenuForCustomerModel)menuModel).addItem(value[0],value[1],mainModel.getCustomerId());
 			}
 		}else if(o instanceof MenuForCustomerModel){
-			
+			if(arg instanceof DishInCart) {
+				mainModel.addItemToCart((DishInCart)arg);				
+			}
 		}
 	}
 	
@@ -45,7 +48,7 @@ public class MenuForCustomerController implements Observer  {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			mainModel.goToResturantsPage();
+			mainModel.goBack();
 		}
 
 	}

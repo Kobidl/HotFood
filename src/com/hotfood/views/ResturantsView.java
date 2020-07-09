@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JTextField;
 
@@ -28,18 +29,21 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.ListSelectionModel;
 
-public class ResturantsView extends JPanel {
+public class ResturantsView extends Observable {
+	JPanel panel;
 	private JTable table;
 	private JButton enterResturantButton;
 
 	public ResturantsView() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		this.setBackground(Color.WHITE);
+		panel = new JPanel();
+		panel.setBounds(0, 40, 546, 498);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.setBackground(Color.WHITE);
 
 		JLabel lblNewLabel_6 = new JLabel("Choose Resturant");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNewLabel_6);
+		panel.add(lblNewLabel_6);
 		
 		table = new JTable();
 		table.setRowMargin(5);
@@ -49,7 +53,7 @@ public class ResturantsView extends JPanel {
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		table.setForeground(Color.BLACK);
 		table.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		add(table);
+		panel.add(table);
 		table.setBackground(Color.white);
 	    
 		JScrollPane tableScrollPane = new JScrollPane(table);
@@ -59,12 +63,16 @@ public class ResturantsView extends JPanel {
 				TitledBorder.CENTER, TitledBorder.TOP,new Font("times new roman",Font.PLAIN,12),Color.white));
 		tableScrollPane.setBackground(Color.WHITE);
 		
-		add(tableScrollPane);
+		panel.add(tableScrollPane);
 		
 		enterResturantButton = new JButton("Enter resturant");
 		enterResturantButton.setEnabled(false);
-		this.add(enterResturantButton);
+		panel.add(enterResturantButton);
 		
+	}
+	
+	public JPanel getView() {
+		return panel;
 	}
 	
 	public void addListSectionListener(ListSelectionListener listner) {

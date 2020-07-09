@@ -37,4 +37,9 @@ public class Menu {
 	public List<Dish> getDishes(){
 		return this.dishes;
 	}
+
+
+	public Dish getDish(int index) {
+		return	this.dishes.get(index);
+	}
 }

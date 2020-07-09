@@ -10,31 +10,33 @@ import javax.swing.table.DefaultTableModel;
 import com.hotfood.handlers.FilesHandler;
 
 public class MenuForCustomerModel extends Observable  {
-	private List<Dish> dishes;
-	private String resturantId;
+	private Menu menu;
 	
-	public MenuForCustomerModel() {
+	public MenuForCustomerModel(Menu menu) {
+		init(menu);
 	}
 	
 
 	public void init(Menu menu) {
-		this.dishes = menu.getDishes();
-		this.resturantId = menu.getResturantId();
+		this.menu = menu;
 	}
 
 
 	public void addItem(int index,int selectedOption,String customerId) {
-		Dish dish = dishes.get(index);
-		DishInCart dishInCart = new DishInCart(dish,selectedOption,this.resturantId);
+		Dish dish = this.menu.getDish(index);
+		DishInCart dishInCart = new DishInCart(dish,selectedOption,menu.getResturantId());
 		FilesHandler.addDishToCart(dishInCart,customerId);
 		setChanged();
 		notifyObservers(dishInCart);
 	}
 
+	public String getResturantName() {
+		return menu.getResturantName();
+	}
 
-	public String getCustomerId() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public List<Dish> getDishes() {
+		return this.menu.getDishes();
 	}
 
 }

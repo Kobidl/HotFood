@@ -20,6 +20,7 @@ import com.hotfood.models.CartModel;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
+import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import javax.swing.JButton;
@@ -27,13 +28,14 @@ import javax.swing.JButton;
 public class MainView extends JFrame {
 
 	LoginView loginPane;
-	ResturantsView resturantsPane;
+	ResturantsView resturantsPanel;
 	MenuForCustomerView menuForCustomerPanel;
 	JLayeredPane layeredPane;
 	Customer customer;
 	MenuForCustomerController menuForCustomerController;
 	MainModel mainModel;
 	JButton cartButton;
+	MenuForCustomerModel menuForCustomerModel;
 	
 	public MainView() {
 		getContentPane().setBackground(Color.WHITE);
@@ -52,25 +54,20 @@ public class MainView extends JFrame {
 	
 		LoginModel loginModel = new LoginModel();
 		
-		resturantsPane = new ResturantsView();
-		resturantsPane.setBounds(0, 40, 546, 498);
+		resturantsPanel = new ResturantsView();
+
 		ResturantsModel resturantsModel = new ResturantsModel();
-		
-		menuForCustomerPanel = new MenuForCustomerView();
-		MenuForCustomerModel menuForCustomerModel = new MenuForCustomerModel();
-		
+				
 		mainModel = new MainModel();
-		MainController mainController = new MainController(this,mainModel,resturantsPane,resturantsModel);
+		MainController mainController = new MainController(this,mainModel,resturantsPanel,resturantsModel);
+	
 		
-		menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
-		((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
-		((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);
+		ResturantsController resturantsController = new ResturantsController(resturantsPanel,resturantsModel,mainModel);
 		
-		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel,menuForCustomerController);
- 
+		
 		((MainModel) mainModel).addObserver(mainController);
 		
-		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
+		LoginController loginController = new LoginController(loginPane,loginModel,mainModel);
 
 		layeredPane.removeAll();
 		layeredPane.add(loginPane);
@@ -81,7 +78,7 @@ public class MainView extends JFrame {
 	}
 	
 	
-	public void switchWindow(WindowStates state) {
+	public void switchWindow(WindowStates state,Object arg) {
 		layeredPane.removeAll();
 		
 		switch(state) {
@@ -89,10 +86,17 @@ public class MainView extends JFrame {
 				layeredPane.add(loginPane);
 				break;
 			case Resturants:
-				layeredPane.add(resturantsPane);
+				layeredPane.add(resturantsPanel.getView());
 				printHeader();
 				break;
 			case MenuForCustomer:
+				menuForCustomerModel = new MenuForCustomerModel((Menu)arg);
+				menuForCustomerPanel = new MenuForCustomerView();
+				
+				menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
+				
+				((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);				
+				((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
 				layeredPane.add(menuForCustomerPanel.getMenu());
 				printHeader();
 				break;

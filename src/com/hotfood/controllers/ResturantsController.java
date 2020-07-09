@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.hotfood.enums.WindowStates;
+import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
@@ -19,13 +20,13 @@ public class ResturantsController implements Observer {
 
 	private ResturantsView resturantsView;
 	ResturantsModel resturantsModel;
-	MenuForCustomerController menuForCustomerController;
+	MainModel mainModel;
 	
 	
-	public ResturantsController(ResturantsView resturantsPane, ResturantsModel resturantsModel, MenuForCustomerController menuForCustomerController) {
+	public ResturantsController(ResturantsView resturantsPane, ResturantsModel resturantsModel, MainModel mainModel) {
 		this.resturantsView = resturantsPane;
 		this.resturantsModel = resturantsModel;
-		this.menuForCustomerController = menuForCustomerController;
+		this.mainModel = mainModel;
 		resturantsPane.addEnterResturantListener(new EnterResturantListener());
 		this.init();
 	}
@@ -50,7 +51,7 @@ public class ResturantsController implements Observer {
 		public void actionPerformed(ActionEvent e) {
 			int selectedRow = resturantsView.getTableSelectedRow();
 			Menu menu = resturantsModel.getMenuAt(selectedRow);
-			menuForCustomerController.init(menu);
+			mainModel.goToCutomerMenu(menu);
 		}
 
 	}

@@ -12,19 +12,20 @@ import com.hotfood.enums.UserType;
 import com.hotfood.handlers.FilesHandler;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
+import com.hotfood.models.MainModel;
 import com.hotfood.models.User;
 import com.hotfood.views.LoginView;
 
 public class LoginController {
 	
 	private LoginView loginView;
-	private MainController mainController;
 	private LoginModel loginModel;
+	private MainModel mainModel;
 	
-	public LoginController(LoginView loginView,LoginModel loginModel,MainController mainController) {
+	public LoginController(LoginView loginView,LoginModel loginModel,MainModel mainModel) {
 		super();
 		this.loginView = loginView;
-		this.mainController = mainController;
+		this.mainModel = mainModel;
 		
 		this.loginView.addLoginListener(new LoginListener());
 		this.loginView.addRegisterListener(new RegisterListener());
@@ -38,8 +39,7 @@ public class LoginController {
 			User user = loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
 			if(user!=null && user.getType() == UserType.Customer) {
 				Customer customer = new Customer(user);
-				mainController.setUser(customer);
-				mainController.switchWindowToResturants();
+				mainModel.goToResturantsPage(customer);
 			}
 			if(user!=null && user.getType() == UserType.Resturant) {
 //				Resturant resturant = new Resturant(user);

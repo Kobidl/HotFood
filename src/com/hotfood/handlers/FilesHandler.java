@@ -207,6 +207,7 @@ public class FilesHandler {
 		String line = dishInCart.toString();
 		 try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+            bw.newLine();
             bw.append(line);
             bw.close();
         } catch (IOException e) {
