@@ -1,12 +1,11 @@
 package com.hotfood.models;
 
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.table.DefaultTableModel;
 
 import com.hotfood.handlers.FilesHandler;
 
+@SuppressWarnings("serial")
 public class ResturantsModel extends DefaultTableModel {
 
 	private static final Object[][] DATA = null;

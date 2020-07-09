@@ -16,13 +16,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class LoginView extends JPanel {
 
 	private JTextField loginEmailInput = new JTextField(50);
 	private JPasswordField loginPasswordInput = new JPasswordField();
 	private JTextField registerEmailInput = new JTextField(50);
 	private JPasswordField registerPasswordInput = new JPasswordField();
-	private JComboBox userTypeSelectBox = new JComboBox();
+	private JComboBox<String> userTypeSelectBox = new JComboBox<String>();
 	private JButton loginButton = new JButton("Login");
 	private JButton registerButton = new JButton("Register");
 	private JTextField registerName = new JTextField(40);
@@ -52,7 +53,7 @@ public class LoginView extends JPanel {
 		
 		
 		userTypeSelectBox.setFont(new Font("Tahoma", Font.BOLD, 13));
-		userTypeSelectBox.setModel(new DefaultComboBoxModel(new String[] {"Resturant Owner", "Customer"}));
+		userTypeSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Resturant Owner", "Customer"}));
 		userTypeSelectBox.setBounds(171, 334, 139, 22);
 		this.add(userTypeSelectBox);
 		
@@ -113,6 +114,7 @@ public class LoginView extends JPanel {
 		return this.loginEmailInput.getText();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String getLoginPassword() {
 		return this.loginPasswordInput.getText();
 	}
@@ -121,6 +123,7 @@ public class LoginView extends JPanel {
 		return this.registerEmailInput.getText();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String getRegisterPassword() {
 		return this.registerPasswordInput.getText();
 	}

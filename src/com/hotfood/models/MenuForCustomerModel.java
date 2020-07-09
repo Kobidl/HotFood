@@ -2,25 +2,19 @@ package com.hotfood.models;
 
 import java.util.List;
 import java.util.Observable;
-import java.util.Vector;
-
-import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
-
 import com.hotfood.handlers.FilesHandler;
+import com.hotfood.interfaces.Model;
 
-public class MenuForCustomerModel extends Observable  {
+public class MenuForCustomerModel extends Observable implements Model  {
 	private Menu menu;
 	
 	public MenuForCustomerModel(Menu menu) {
 		init(menu);
 	}
 	
-
 	public void init(Menu menu) {
 		this.menu = menu;
 	}
-
 
 	public void addItem(int index,int selectedOption,String customerId) {
 		Dish dish = this.menu.getDish(index);

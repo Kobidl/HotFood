@@ -3,8 +3,9 @@ package com.hotfood.models;
 import javax.swing.JOptionPane;
 
 import com.hotfood.handlers.FilesHandler;
+import com.hotfood.interfaces.Model;
 
-public class LoginModel {
+public class LoginModel implements Model {
 	
 	
 	public User login(String e,String p) {

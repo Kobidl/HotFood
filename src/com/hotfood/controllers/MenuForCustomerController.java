@@ -1,17 +1,13 @@
 package com.hotfood.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
-import java.util.Observer;
-
+import com.hotfood.interfaces.Controller;
 import com.hotfood.models.DishInCart;
 import com.hotfood.models.MainModel;
-import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.views.MenuForCustomerView;
 
-public class MenuForCustomerController implements Observer  {
+public class MenuForCustomerController implements Controller  {
 
 	private MenuForCustomerView menuView;
 	private MenuForCustomerModel menuModel;

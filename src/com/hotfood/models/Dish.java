@@ -1,10 +1,11 @@
 package com.hotfood.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Dish {
+import com.hotfood.interfaces.DishInterface;
+
+public class Dish implements DishInterface {
 	private String id;
 	private String name;
 	private String description;

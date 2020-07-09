@@ -2,22 +2,20 @@ package com.hotfood.models;
 
 import java.util.List;
 
-public class Menu {
+import com.hotfood.interfaces.MenuInterface;
 
-	private String id;
+public class Menu implements MenuInterface {
+
 	private String resturantId;
 	private String resturantName;
-//	private String name;
 	private List<Dish> dishes;
 	
 	
-	public Menu(String id,String resturantId,String resturantName,List<Dish> dishes) {
-		this.id = id;
+	public Menu(String resturantId,String resturantName,List<Dish> dishes) {
 		this.resturantId = resturantId;
 		this.resturantName = resturantName;
 		this.dishes = dishes;
 	}
-	
 	
 	public String getResturantId() {
 		return this.resturantId;

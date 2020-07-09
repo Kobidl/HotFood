@@ -1,6 +1,7 @@
 package com.hotfood.models;
 
 import com.hotfood.interfaces.UserInterface;
+
 import com.hotfood.enums.UserType;
 
 public class User implements UserInterface {
@@ -9,10 +10,6 @@ public class User implements UserInterface {
 	private String password;
 	private String name;
 	private UserType type;
-	
-	public User() {
-		
-	}
 	
 	public User(String id,String email,String password,String userType,String name) {
 		this.id = id;
@@ -48,7 +45,9 @@ public class User implements UserInterface {
 		return this.type;
 	}
 	
+	@Override
 	public String getName() {
 		return this.name;
 	}
+
 }

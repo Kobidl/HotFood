@@ -1,40 +1,22 @@
 package com.hotfood.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-
-import com.hotfood.models.Dish;
 import com.hotfood.models.DishInCart;
 
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
-import javax.swing.SpringLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
+@SuppressWarnings("serial")
 public class ItemInCartView extends JPanel implements ActionListener {
 	private int index;
 	JLabel nameLabel;

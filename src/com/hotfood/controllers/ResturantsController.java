@@ -3,20 +3,16 @@ package com.hotfood.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JLayeredPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.hotfood.enums.WindowStates;
+import com.hotfood.interfaces.Controller;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
-import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.ResturantsModel;
 import com.hotfood.views.ResturantsView;
 
-public class ResturantsController implements Observer {
+public class ResturantsController implements Controller {
 
 	private ResturantsView resturantsView;
 	ResturantsModel resturantsModel;

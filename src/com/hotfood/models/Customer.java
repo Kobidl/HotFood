@@ -3,8 +3,9 @@ package com.hotfood.models;
 import java.util.List;
 
 import com.hotfood.handlers.FilesHandler;
+import com.hotfood.interfaces.CustomerInterface;
 
-public class Customer extends User {
+public class Customer extends User implements CustomerInterface {
 	private List<DishInCart> cart;
 	
 	public Customer(String id,String email,String password,String name){
@@ -19,8 +20,7 @@ public class Customer extends User {
 	}
 	
 	private void initCart(String userId) {
-		this.cart = FilesHandler.getCartData(userId);
-		
+		this.cart = FilesHandler.getCartData(userId);	
 	}
 	
 	public List<DishInCart> getCart(){

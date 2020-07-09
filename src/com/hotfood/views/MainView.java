@@ -2,14 +2,10 @@ package com.hotfood.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-
 import com.hotfood.controllers.CartController;
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
@@ -17,7 +13,6 @@ import com.hotfood.controllers.MenuForCustomerController;
 import com.hotfood.controllers.ResturantsController;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.CartModel;
-import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
@@ -93,7 +88,7 @@ public class MainView extends JFrame {
 				MenuForCustomerController menuForCustomerController = new MenuForCustomerController(menuForCustomerPanel, menuForCustomerModel,mainModel);
 				((MenuForCustomerView)menuForCustomerPanel).addObserver(menuForCustomerController);				
 				((MenuForCustomerModel)menuForCustomerModel).addObserver(menuForCustomerController);
-				layeredPane.add(menuForCustomerPanel.getMenu());
+				layeredPane.add(menuForCustomerPanel.getView());
 				break;
 			case Cart:
 				CartView cartView = new CartView();

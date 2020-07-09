@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -176,7 +174,7 @@ public class FilesHandler {
 			File f = new File(path);
 			if(f.exists() && !f.isDirectory()) { 
 				List<Dish> dishes= getMenuDishes(path);
-				Menu menu = new Menu(entry.getKey(),entry.getKey(),entry.getValue(),dishes);
+				Menu menu = new Menu(entry.getKey(),entry.getValue(),dishes);
 				menus.add(menu);
 			}
 		}

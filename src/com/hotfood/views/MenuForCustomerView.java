@@ -1,64 +1,22 @@
 package com.hotfood.views;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JTextField;
-
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
-import javax.swing.JTable;
-import javax.swing.JScrollBar;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import com.jgoodies.forms.layout.FormLayout;
+
+import com.hotfood.interfaces.View;
 import com.hotfood.models.Dish;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JSeparator;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.ScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Scrollable;
-import javax.swing.JTextArea;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Point;
 
-public class MenuForCustomerView extends Observable{
+public class MenuForCustomerView extends Observable implements View{
 	private JPanel menu;
 	private JPanel innerPanel;
 	private JScrollPane scroller;
@@ -97,7 +55,7 @@ public class MenuForCustomerView extends Observable{
 		
 	}
 	
-	public JPanel getMenu() {
+	public JPanel getView() {
 		return this.menu;
 	}
 	

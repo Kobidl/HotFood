@@ -3,13 +3,7 @@ package com.hotfood.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import com.hotfood.enums.UserType;
-import com.hotfood.handlers.FilesHandler;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;

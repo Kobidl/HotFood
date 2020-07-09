@@ -1,38 +1,23 @@
 package com.hotfood.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-
 import com.hotfood.models.Dish;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
-import javax.swing.SpringLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+@SuppressWarnings("serial")
 public class DishRender extends JPanel implements ActionListener {
 	private int index;
 	JLabel nameLabel;
@@ -40,7 +25,7 @@ public class DishRender extends JPanel implements ActionListener {
 	private JTextArea textArea;
 	private JButton btnNewButton;
 	MenuForCustomerView dishesView;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblNewLabel;
 	
 	public DishRender(int index,Dish dish,MenuForCustomerView dishesView) {
@@ -108,8 +93,8 @@ public class DishRender extends JPanel implements ActionListener {
 		gbc_lblNewLabel.gridy = 3;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(dish.cleanOptions()));
+		comboBox = new JComboBox<String>();
+		comboBox.setModel(new DefaultComboBoxModel<String>(dish.cleanOptions()));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;

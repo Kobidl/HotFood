@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Observable;
 
 import com.hotfood.enums.WindowStates;
+import com.hotfood.interfaces.MainModelInterface;
 
-public class MainModel extends Observable  {
+public class MainModel extends Observable implements MainModelInterface {
 
 	private WindowStates state = WindowStates.Login;
 	private Customer customer;
