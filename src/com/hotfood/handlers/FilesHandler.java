@@ -107,9 +107,11 @@ public class FilesHandler {
 				String line = reader.readLine().trim();
 				
 				while (line != null) {
-					String [] details = line.split(spliter);
-					DishInCart dish = new DishInCart(details);
-					dishes.add(dish);
+					if(!line.isEmpty()) {
+						String [] details = line.split(spliter);
+						DishInCart dish = new DishInCart(details);
+						dishes.add(dish);
+					}
 					// read next line
 					line = reader.readLine();
 				}

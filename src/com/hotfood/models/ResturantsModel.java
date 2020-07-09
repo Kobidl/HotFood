@@ -24,6 +24,10 @@ public class ResturantsModel extends DefaultTableModel {
        return false;
     }
 	
+    public List<Menu> getResturants() {
+    	return this.resturants;
+    }
+    
 	public void load() {
 		this.resturants = FilesHandler.getMenus();
 		Object[][] newData = new Object[resturants.size()][];

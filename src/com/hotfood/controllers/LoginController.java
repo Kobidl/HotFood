@@ -3,6 +3,8 @@ package com.hotfood.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import com.hotfood.enums.UserType;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
@@ -31,6 +33,9 @@ public class LoginController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			User user = loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
+			if(user == null) {
+				JOptionPane.showMessageDialog(null,"User already found with this email");
+			}
 			if(user!=null && user.getType() == UserType.Customer) {
 				Customer customer = new Customer(user);
 				mainModel.goToResturantsPage(customer);

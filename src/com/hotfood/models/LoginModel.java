@@ -13,12 +13,9 @@ public class LoginModel implements Model {
 		String email = e.trim();
 		String password = p.trim();
 		if(email.isEmpty() || password.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
+			return user;
 		}else {
 			user = FilesHandler.getUserFromUsers(email, password);
-			if(user == null) {
-				JOptionPane.showMessageDialog(null, "User not found!");
-			}
 		}
 		return user;
 	}
