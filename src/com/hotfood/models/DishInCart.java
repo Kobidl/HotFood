@@ -34,4 +34,7 @@ public class DishInCart extends Dish {
 			return "";
 	}
 	
+	public String getResturantId() {
+		return this.resturantId;
+	}
 }

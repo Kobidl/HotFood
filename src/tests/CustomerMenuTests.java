@@ -45,12 +45,24 @@ public class CustomerMenuTests {
 			userId = null;
 		}
 	}
+
+	private void compareMenus(Menu menu1,MenuForCustomerModel menu2) {
+		assertTrue(menu1.getResturantName().equals(menu2.getResturantName()));
+		assertEquals(menu1.getDishesSize(),menu2.getDishes().size());
+		for(int i=0;i<menu1.getDishesSize();i++) {
+			Dish dish1 = menu1.getDish(i);
+			Dish dish2 = menu2.getDishes().get(i);
+			compereDishes(dish1,dish2);
+		}
+		
+	}
 	
 	@Test
 	public void getMenuDetails() {
 		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
-		assertTrue(menu.getResturantName().equals(menuForCus.getResturantName()));
+		assertEquals(menu.getResturantName(),menuForCus.getResturantName());
 		assertEquals(menu.getDishesSize(),menuForCus.getDishes().size());
+		compareMenus(menu,menuForCus);
 		
 	}
 
@@ -58,10 +70,23 @@ public class CustomerMenuTests {
 	public void addItemFromMenu() {
 		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
 		userId = UUID.randomUUID().toString();
-		menuForCus.addItem(0, 0, userId);
+		int selectedOption = 1;
+		menuForCus.addItem(0, selectedOption, userId);
 		
 		List<DishInCart> cart = FilesHandler.getCartData(userId);
-		assertTrue("Failed to find user cart data", cart.size() == 1);
+		assertEquals("Failed to find user cart data",1, cart.size());
+		DishInCart dish = cart.get(0);
+		assertEquals(dish.getResturantId(),(menu.getResturantId()));
+		assertEquals(menu.getDish(0).getOptions()[selectedOption],dish.getSelectedOptionText());
+		compereDishes(menu.getDish(0),dish);
+	}
+	
+	public void compereDishes(Dish dish1,Dish dish2) {
+		assertEquals(dish1.getId(),dish2.getId());
+		assertEquals(dish1.getName(),dish2.getName());
+		assertEquals(dish1.getDescription(),dish2.getDescription());
+		assertEquals(dish1.getPrice(), dish2.getPrice(),10);
+		assertEquals(dish1.getOptions(), dish2.getOptions());
 	}
 	
 	@Test
