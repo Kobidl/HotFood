@@ -11,6 +11,7 @@ import com.hotfood.handlers.FilesHandler;
 
 public class MenuForCustomerModel extends Observable  {
 	private List<Dish> dishes;
+	private String resturantId;
 	
 	public MenuForCustomerModel() {
 	}
@@ -18,12 +19,22 @@ public class MenuForCustomerModel extends Observable  {
 
 	public void init(Menu menu) {
 		this.dishes = menu.getDishes();
+		this.resturantId = menu.getResturantId();
 	}
 
 
-	public void addItem() {
+	public void addItem(int index,int selectedOption,String customerId) {
+		Dish dish = dishes.get(index);
+		DishInCart dishInCart = new DishInCart(dish,selectedOption,this.resturantId);
+		FilesHandler.addDishToCart(dishInCart,customerId);
 		setChanged();
-		notifyObservers("a");
+		notifyObservers(dishInCart);
+	}
+
+
+	public String getCustomerId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

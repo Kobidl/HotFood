@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.hotfood.models.Dish;
+import com.hotfood.models.DishInCart;
 import com.hotfood.models.Menu;
 import com.hotfood.models.User;
 
@@ -22,7 +23,7 @@ public class FilesHandler {
 	private final static String spliter = ",";
 	private final static String extention = ".csv";
 	private final static String usersPath = "data/users.csv";
-	private final static String cartsPath = "data/carts.csv";
+	private final static String cartsPath = "data/carts/";
 	private final static String menusPath = "data/menus/";
 	
 	public static User getUserFromUsers(String email,String password) {
@@ -97,11 +98,29 @@ public class FilesHandler {
 		return created;
 	}
 
-	public static void getCartData(String id) {
-		File f = new File(cartsPath);
+	public static List<DishInCart> getCartData(String customerId) {
+		List<DishInCart> dishes = new ArrayList<DishInCart>();
+		String path = cartsPath + customerId + ".csv";
+		File f = new File(path);
 		if(f.exists() && !f.isDirectory()) { 
-		    
+			BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader(path));
+				String line = reader.readLine().trim();
+				
+				while (line != null) {
+					String [] details = line.split(spliter);
+					DishInCart dish = new DishInCart(details);
+					dishes.add(dish);
+					// read next line
+					line = reader.readLine();
+				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		return dishes;
 	}
 	
 	private static Map<String,String> getResturants() {
@@ -137,15 +156,8 @@ public class FilesHandler {
 			
 			while (line != null) {
 				String [] details = line.split(spliter);
-				if(details.length == 8) {
-					String id = details[0];
-					String name = details[1];
-					String description = details[2];
-					String[] options = new String[] {details[3],details[4],details[5],details[6]};
-					double price = Double.parseDouble(details[7]);
-					Dish dish = new Dish(id,name,description,options,price);
-					dishes.add(dish);
-				}
+				Dish dish = new Dish(details);
+				dishes.add(dish);
 				// read next line
 				line = reader.readLine();
 			}
@@ -170,5 +182,60 @@ public class FilesHandler {
 		}
 		
 		return menus;
+	}
+	
+	private static File checkIfCartExists(String customerId) {
+		String path = cartsPath + customerId + ".csv";
+		File f = new File(path);
+		if(!f.exists() || f.isDirectory()) { 
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				System.out.print("Failed to create cart for user");
+				System.out.println(e.getMessage());
+				return null;
+			}
+		}
+		return f;
+	}
+
+	public static boolean addDishToCart(DishInCart dishInCart, String customerId) {
+		File f;
+		if((f=checkIfCartExists(customerId))== null) {
+			return false;
+		}
+		String line = dishInCart.toString();
+		 try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+            bw.append(line);
+            bw.close();
+        } catch (IOException e) {
+        	System.out.print("Failed to write to cart");
+            System.out.println(e.getMessage());
+            return false;
+        }
+		return true;
+	}
+
+	public static void saveCart(List<DishInCart> dishes, String customerId) {
+		File f;
+		if((f=checkIfCartExists(customerId))==null) {
+			return;
+		}
+		 try {
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(f, false));
+			 for(int i=0;i<dishes.size();i++) {
+				 if(i>0)
+					 bw.newLine();
+				 bw.append(dishes.get(i).toString());
+			 }
+
+			 bw.close();
+		 } catch (IOException e) {
+       	System.out.print("Failed to write to cart");
+           System.out.println(e.getMessage());
+           return;
+       }
+		
 	}
 }

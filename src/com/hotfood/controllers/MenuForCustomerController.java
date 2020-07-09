@@ -32,7 +32,10 @@ public class MenuForCustomerController implements Observer  {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof MenuForCustomerView) {
-			((MenuForCustomerModel)menuModel).addItem();;
+			if(arg instanceof int[]) {
+				int [] value = (int[])arg;
+				((MenuForCustomerModel)menuModel).addItem(value[0],value[1],mainModel.getCustomerId());;
+			}
 		}else if(o instanceof MenuForCustomerModel){
 			
 		}

@@ -4,5 +4,6 @@ public enum WindowStates {
 	Login,
 	Resturants,
 	Menu, 
-	MenuForCustomer
+	MenuForCustomer, 
+	Cart
 }

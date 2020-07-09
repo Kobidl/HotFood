@@ -25,6 +25,7 @@ public class MainController implements Observer {
 		this.mainModel = mainModel;
 		this.resturantsModel = resturantsModel;
 		resturantsView.addEnterResturantListener(new EnterResturantListener());
+		mainView.addCartListener(new GotoCartListener());
 	}
 	
 	
@@ -40,13 +41,27 @@ public class MainController implements Observer {
 		}
 	}
 
+	class GotoCartListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mainModel.goToCart();
+		}
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof MainModel) {
 			if(arg == WindowStates.Resturants) {
 				switchWindowToResturants();
 			}
+			if(arg == WindowStates.Cart) {
+				this.mainView.switchWindow(WindowStates.Cart);
+			}
 		}
+	}
+
+	public void setUser(Customer customer) {
+		this.mainModel.setUser(customer);
 	}
 
 }

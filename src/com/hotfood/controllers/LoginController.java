@@ -37,15 +37,15 @@ public class LoginController {
 		public void actionPerformed(ActionEvent e) {
 			User user = loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
 			if(user!=null && user.getType() == UserType.Customer) {
-				//Customer customer = new Customer(user);
+				Customer customer = new Customer(user);
+				mainController.setUser(customer);
 				mainController.switchWindowToResturants();
 			}
 			if(user!=null && user.getType() == UserType.Resturant) {
 //				Resturant resturant = new Resturant(user);
 //				mainController.switchWindowToResturants(resturant);
 			}
-		}
-		
+		}	
 	}
 	
 	class RegisterListener implements ActionListener{

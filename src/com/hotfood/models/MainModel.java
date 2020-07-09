@@ -9,6 +9,7 @@ import com.hotfood.views.MainView;
 public class MainModel extends Observable  {
 
 	private WindowStates state = WindowStates.Login;
+	private Customer customer;
 	
 	public MainModel() {}
 	
@@ -20,15 +21,32 @@ public class MainModel extends Observable  {
 		this.state = state;
 	}
 	
+	public Customer getCustomer() {
+		return this.customer;
+	}
+	
 	public WindowStates getState() {
 		return this.state;
 	}
 
 	public void goToResturantsPage() {
 		this.state = WindowStates.Resturants;
-		
 		setChanged();
 		notifyObservers(this.state);
+	}
+	
+	public void goToCart() {
+		this.state = WindowStates.Cart;
+		setChanged();
+		notifyObservers(this.state);
+	}
+
+	public void setUser(Customer customer) {
+		this.customer = customer;
+	}
+
+	public String getCustomerId() {
+		return this.customer.getId();
 	}
 
 }
