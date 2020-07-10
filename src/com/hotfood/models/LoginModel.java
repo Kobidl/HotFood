@@ -62,7 +62,7 @@ public class LoginModel extends Observable implements Model {
 			return RegisterStatus.UserExists;
 		}
 
-		success = FilesHandler.createNewUser(email,password,type,name);
+		success = FilesHandler.createNewUser(email,password,name,type);
 		if(!success) {
 			return RegisterStatus.GeneralError;
 		}
