@@ -35,7 +35,7 @@ public class LoginController {
 		public void actionPerformed(ActionEvent e) {
 			User user = loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
 			if(user == null) {
-				JOptionPane.showMessageDialog(null,"User already found with this email");
+				JOptionPane.showMessageDialog(null,"Something went wrong. Please check your details and try again.");
 			}
 			if(user!=null && user.getType() == UserType.Customer) {
 				Customer customer = new Customer(user);
