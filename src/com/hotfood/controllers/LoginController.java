@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import com.hotfood.enums.RegisterStatus;
 import com.hotfood.enums.UserType;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
@@ -51,9 +52,32 @@ public class LoginController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			loginModel.register( loginView.getRegisterEmail(), loginView.getRegisterPassword(), loginView.getSelectedUserType(),loginView.getRegisterName());	
-		}
+			RegisterStatus status = loginModel.register( loginView.getRegisterEmail(), loginView.getRegisterPassword(), loginView.getSelectedUserType(),loginView.getRegisterName());
+			String message = "";
+			switch (status) {
+			case Success:
+				message = "User Created Sucessfully";
+				break;
+			case BadEmail:
+				message = "Bad email, please try again";
+				break;
+			case BadPassword:
+				message = "Password must have minimum 5 letters, please try again";
+				break;
+			case BadName:
+				message = "Bad name, please try again";
+				break;
+			case UserExists:
+				message = "User is already exists.";
+				break;
+			case GeneralError:
+				message ="Something went wrong. Please try again later";
+				break;
+			default:
+				break;
+			}
 			
+			JOptionPane.showMessageDialog(null,message);
+		}
 	}
-
 }

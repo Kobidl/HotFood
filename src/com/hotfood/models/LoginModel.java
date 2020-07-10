@@ -1,7 +1,10 @@
 package com.hotfood.models;
 
+import java.util.regex.Pattern;
+
 import javax.swing.JOptionPane;
 
+import com.hotfood.enums.RegisterStatus;
 import com.hotfood.handlers.FilesHandler;
 import com.hotfood.interfaces.Model;
 
@@ -20,28 +23,36 @@ public class LoginModel implements Model {
 		return user;
 	}
 	
-	public boolean register(String e,String p,int type,String n) {
+	public RegisterStatus register(String e,String p,int type,String n) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+				"[a-zA-Z0-9_+&*-]+)*@" + 
+				"(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+				"A-Z]{2,7}$";
+    
 		String email = e.trim();
 		String password = p.trim();
 		String name = n.trim();
 		boolean success = false;
-		if(email.isEmpty() || password.isEmpty() || name.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "One of the required fields is missing!");
-		}else {
-			boolean exists = FilesHandler.checkIfUserExistInUsers(email);
-			if(exists) {
-				JOptionPane.showMessageDialog(null,"User already found with this email");
-			}else {
-				success = FilesHandler.createNewUser(email,password,type,name);
-				if(success) {
-					JOptionPane.showMessageDialog(null,"User Created successfully");
-				}else {
-					JOptionPane.showMessageDialog(null,"Failed to create the user");
-				}
-			}
+		Pattern pat = Pattern.compile(emailRegex);
+		if(email.isEmpty() || !pat.matcher(email).matches()) {
+			return RegisterStatus.BadEmail;
+		}
+		if(password.isEmpty() && password.length() > 5) {
+			return RegisterStatus.BadPassword;
+		}
+		if(name.isEmpty() && name.length() > 2) {
+			return RegisterStatus.BadName;
+		}
+		if(FilesHandler.checkIfUserExistInUsers(email)) {
+			return RegisterStatus.UserExists;
+		}
+
+		success = FilesHandler.createNewUser(email,password,type,name);
+		if(!success) {
+			return RegisterStatus.GeneralError;
 		}
 		
-		return success;
+		return RegisterStatus.Success;
 	}
 	
 }
