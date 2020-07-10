@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
-import com.hotfood.controllers.ResturantsController;
+//import com.hotfood.controllers.ResturantsController;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
@@ -50,7 +50,7 @@ public class MainView extends JFrame {
 		
 		MainController mainController = new MainController(this,mainModel,resturantsModel); 
 		LoginController loginController = new LoginController(loginPane,loginModel,mainController);
-		ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel);
+	//	ResturantsController resturantsController = new ResturantsController(resturantsPane,resturantsModel);
 
 		layeredPane.removeAll();
 		layeredPane.add(loginPane);
