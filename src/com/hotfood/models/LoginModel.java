@@ -1,5 +1,6 @@
 package com.hotfood.models;
 
+import java.util.Observable;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
@@ -8,10 +9,17 @@ import com.hotfood.enums.RegisterStatus;
 import com.hotfood.handlers.FilesHandler;
 import com.hotfood.interfaces.Model;
 
-public class LoginModel implements Model {
+public class LoginModel extends Observable implements Model {
+	
+	public User login(String loginEmail, String loginPassword) {
+		User user = getLoginUser(loginEmail, loginPassword);
+		setChanged();
+		notifyObservers(user);
+		return user;
+	}
 	
 	
-	public User login(String e,String p) {
+	private User getLoginUser(String e,String p) {
 		User user = null;
 		String email = e.trim();
 		String password = p.trim();
@@ -24,6 +32,13 @@ public class LoginModel implements Model {
 	}
 	
 	public RegisterStatus register(String e,String p,int type,String n) {
+		RegisterStatus status = getRegisterStatus(e,p,type,n);
+		setChanged();
+		notifyObservers(status);
+		return status;
+	}
+	
+	private RegisterStatus getRegisterStatus(String e,String p,int type,String n) {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
 				"[a-zA-Z0-9_+&*-]+)*@" + 
 				"(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
@@ -54,5 +69,5 @@ public class LoginModel implements Model {
 		
 		return RegisterStatus.Success;
 	}
-	
+
 }

@@ -59,8 +59,8 @@ public class MainView extends JFrame {
 		
 		((MainModel) mainModel).addObserver(mainController);
 		
-		layeredPane.add(backButton);
-		layeredPane.add(cartButton);
+//		layeredPane.add(backButton);
+//		layeredPane.add(cartButton);
 		//layeredPane.add(headerLabel);
 
 	}
@@ -71,10 +71,13 @@ public class MainView extends JFrame {
 		
 		switch(state) {
 			case Login:
-				LoginView loginPane = new LoginView();
+				LoginView loginView = new LoginView();
 				LoginModel loginModel = new LoginModel();
-				layeredPane.add(loginPane);
-				LoginController loginController = new LoginController(loginPane,loginModel,mainModel);
+				layeredPane.add(loginView.getView());
+				LoginController loginController = new LoginController(loginView.getView(),loginModel,mainModel);
+				((LoginModel)loginModel).addObserver(loginController);
+				((LoginView)loginView).addObserver(loginController);
+		
 				break;
 			case Resturants:
 				ResturantsView resturantsPanel = new ResturantsView();
@@ -108,6 +111,7 @@ public class MainView extends JFrame {
 
 	public void printHeader(WindowStates state) {
 		layeredPane.add(headerLabel);
+		
 		if(state!= WindowStates.Login) {
 			if(state != WindowStates.Cart) {
 				layeredPane.add(cartButton);

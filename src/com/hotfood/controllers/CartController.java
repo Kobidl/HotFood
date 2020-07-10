@@ -3,11 +3,12 @@ package com.hotfood.controllers;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.hotfood.interfaces.Controller;
 import com.hotfood.models.CartModel;
 import com.hotfood.models.MainModel;
 import com.hotfood.views.CartView;
 
-public class CartController implements Observer  {
+public class CartController implements Controller  {
 
 	private CartView view;
 	private CartModel model;
