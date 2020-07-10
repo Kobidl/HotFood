@@ -11,7 +11,7 @@ public class User implements UserInterface {
 	private String name;
 	private UserType type;
 	
-	public User(String id,String email,String password,String userType,String name) {
+	public User(String id,String email,String password,String name,String userType) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
