@@ -77,7 +77,7 @@ public class FilesHandler {
 		return found;
 	}
 	
-	public static boolean createNewUser(String email,String password,int type,String name) {
+	public static boolean createNewUser(String email,String password,String name,int type) {
 		UUID uuid = UUID.randomUUID();
 		String[] details = {uuid.toString() ,email,password,name ,Integer.toString(type) };
 		String line = System.lineSeparator() + String.join(spliter, details);

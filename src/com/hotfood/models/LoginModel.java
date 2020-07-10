@@ -52,10 +52,10 @@ public class LoginModel extends Observable implements Model {
 		if(email.isEmpty() || !pat.matcher(email).matches()) {
 			return RegisterStatus.BadEmail;
 		}
-		if(password.isEmpty() && password.length() > 5) {
+		if(password.isEmpty() || password.length() < 6) {
 			return RegisterStatus.BadPassword;
 		}
-		if(name.isEmpty() && name.length() > 2) {
+		if(name.isEmpty() || name.length() < 2) {
 			return RegisterStatus.BadName;
 		}
 		if(FilesHandler.checkIfUserExistInUsers(email)) {
