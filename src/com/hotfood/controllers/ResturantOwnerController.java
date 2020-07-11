@@ -3,6 +3,9 @@ package com.hotfood.controllers;
 import java.io.File;
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
+import com.hotfood.enums.UploadFileStatus;
 import com.hotfood.interfaces.Controller;
 import com.hotfood.models.DishInCart;
 import com.hotfood.models.MenuForCustomerModel;
@@ -36,7 +39,18 @@ public class ResturantOwnerController implements Controller {
 				this.model.saveMenu();
 			}
 		}else if(o instanceof ResturantOwnerModel) {
-			view.printDishes(model.getMenu().getDishes());
+			UploadFileStatus status = (UploadFileStatus)arg;
+			if(status == UploadFileStatus.SUCCESS) {
+				view.printDishes(model.getMenu().getDishes());
+				return;
+			}
+			if(status == UploadFileStatus.BAD_FORMAT) {
+				JOptionPane.showMessageDialog(null,"Bad file, expected csv file");
+			}else if (status == UploadFileStatus.GENERAL_ERROR) {
+				JOptionPane.showMessageDialog(null,"Something went wrong. Check the file and try again");
+			}
+			view.activeDeactiveButtons(true);
+			
 		}
 	}
 

@@ -153,19 +153,24 @@ public class FilesHandler implements FileHandlerConsts{
 			
 			while (line != null) {
 				String [] details = line.split(spliter);
+				if(details.length ==0 ) continue;
 				if(details.length == 8 || details.length == 10) {
 					try {
 						Dish dish = new Dish(details);
 						dishes.add(dish);
 					}
-					catch(Exception e) {}
+					catch(Exception e) {
+						dishes = null;
+						break;
+					}
 				// read next line
 				}
 				line = reader.readLine();
 			}
 			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
+			dishes = null;
 		}
 		return dishes;
 	}

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Date;
 
 import com.hotfood.handlers.FilesHandler;
+import com.hotfood.interfaces.RestaurantInterface;
 
-public class Restaurant extends User {
+public class Restaurant extends User implements RestaurantInterface {
 	private Menu menu;
 	
 	public Restaurant(String id,String email,String password,String name){
@@ -18,7 +19,7 @@ public class Restaurant extends User {
 		initMenu();
 	}
 	
-	public void initMenu(){
+	private void initMenu(){
 		this.menu = FilesHandler.getMenu(super.getId(),super.getName());
 		
 	}

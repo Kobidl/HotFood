@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Observable;
 
+import com.hotfood.enums.UploadFileStatus;
 import com.hotfood.handlers.FilesHandler;
 
 public class ResturantOwnerModel  extends Observable {
@@ -21,11 +22,21 @@ public class ResturantOwnerModel  extends Observable {
 		return this.restaurant.getName();
 	}
 	
-	public void uploadNewMenu(File file) {
-		List<Dish> dishes = FilesHandler.loadMenu(this.restaurant.getId(), this.getName(),file);
-		this.restaurant.updateMenu(dishes);
+	public UploadFileStatus uploadNewMenu(File file) {
+		UploadFileStatus status = UploadFileStatus.SUCCESS;
+		if(!file.getName().endsWith(".csv")) {
+			status = UploadFileStatus.BAD_FORMAT;
+		}else {
+			List<Dish> dishes = FilesHandler.loadMenu(this.restaurant.getId(), this.getName(),file);
+			if(dishes == null) {
+				status = UploadFileStatus.GENERAL_ERROR;
+			}else {
+				this.restaurant.updateMenu(dishes);
+			}
+		}
 		setChanged();
-		notifyObservers();
+		notifyObservers(status);
+		return status;
 	}
 	
 	public void saveMenu() {
