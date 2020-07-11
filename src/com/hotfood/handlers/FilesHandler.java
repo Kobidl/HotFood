@@ -21,15 +21,34 @@ import com.hotfood.models.User;
 
 public class FilesHandler implements FileHandlerConsts{
 
+	private static String removeQoutes(String s) {
+		return s.replaceAll("^\"+|\"+$", "");
+	}
+	
+	private static String[] readLine(String line) {
+		if(line!=null) {
+			line = line.trim();
+			String[] details = line.split(readSpliter);
+			for(int i=0;i<details.length;i++) {
+				details[i] = removeQoutes(details[i]);
+			}
+			return details;
+		}
+		else {
+			return new String[] {};
+		}
+	}
+	
 	public static User getUserFromUsers(String email,String password) {
 		User user = null;
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(usersPath));
-			String line = reader.readLine().trim();
+			String line = reader.readLine();
 			
 			while (line != null) {
-				String [] details = line.split(spliter);
+			
+				String [] details = readLine(line);
 				if(details.length > 1) {
 					String e = details[1];
 					String p = details[2];
@@ -56,7 +75,7 @@ public class FilesHandler implements FileHandlerConsts{
 			String line = reader.readLine().trim();
 			
 			while (line != null) {
-				String [] details = line.split(spliter);
+				String [] details = readLine(line);
 				if(details.length > 1) {
 					String e = details[1];
 					if(email.equals(e)) {
@@ -77,12 +96,13 @@ public class FilesHandler implements FileHandlerConsts{
 	public static boolean createNewUser(String email,String password,String name,int type) {
 		UUID uuid = UUID.randomUUID();
 		String[] details = {uuid.toString() ,email,password,name ,Integer.toString(type) };
-		String line = System.lineSeparator() + String.join(spliter, details);
+		String line = String.join("\"" + spliter + "\"", details);
 		File f = new File(usersPath);
 		boolean created = false;
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
-            bw.append(line);
+            bw.newLine();
+            bw.append("\"" + line + "\"");
             bw.close();
             created = true;
         } catch (IOException e) {
@@ -104,9 +124,8 @@ public class FilesHandler implements FileHandlerConsts{
 				String line = reader.readLine();
 				
 				while (line != null) {
-					line = line.trim();
 					if(!line.isEmpty()) {
-						String [] details = line.split(spliter);
+						String [] details = readLine(line);
 						DishInCart dish = new DishInCart(details);
 						dishes.add(dish);
 					}
@@ -129,7 +148,7 @@ public class FilesHandler implements FileHandlerConsts{
 			String line = reader.readLine().trim();
 			
 			while (line != null) {
-				String [] details = line.split(spliter);
+				String [] details = readLine(line);
 				if(details.length > 1) {
 					String id = details[0];
 					String name = details[3];
@@ -154,7 +173,7 @@ public class FilesHandler implements FileHandlerConsts{
 			String line = reader.readLine().trim();
 			
 			while (line != null) {
-				String [] details = line.split(spliter);
+				String [] details = readLine(line);
 				if(details.length ==0 ) continue;
 				if(details.length == 8 || details.length == 10) {
 					try {
@@ -185,7 +204,7 @@ public class FilesHandler implements FileHandlerConsts{
             for(int i=0;i<menu.getDishes().size();i++) {
 				 if(i>0)
 					 bw.newLine();
-				 bw.append(menu.getDish(i).toString());
+				 bw.append("\"" + menu.getDish(i).toString() + "\"");
 			 }
 
             bw.close();
@@ -240,7 +259,7 @@ public class FilesHandler implements FileHandlerConsts{
 		 try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
             bw.newLine();
-            bw.append(line);
+            bw.append("\""+line+"\"");
             bw.close();
         } catch (IOException e) {
         	System.out.print("Failed to write to cart");
@@ -260,7 +279,7 @@ public class FilesHandler implements FileHandlerConsts{
 			 for(int i=0;i<dishes.size();i++) {
 				 if(i>0)
 					 bw.newLine();
-				 bw.append(dishes.get(i).toString());
+				 bw.append("\""+dishes.get(i).toString()+"\"");
 			 }
 
 			 bw.close();
@@ -306,10 +325,10 @@ public class FilesHandler implements FileHandlerConsts{
 		 try {
            BufferedWriter bw = new BufferedWriter(new FileWriter(f, false));
            String [] line = new String[]{customerId,firstName,lastName,city,street,floor,apartment,delivery.toString()};
-           bw.write(String.join(spliter, line));
+           bw.append(String.join("\""+spliter+"\"", line));
            for(int i=0;i<dishes.size();i++) {
     	   	 	bw.newLine();
-    	   	 	bw.append(dishes.get(i).toString());
+    	   	 	bw.append("\""+dishes.get(i).toString()+"\"");
 			 }
            bw.close();
        } catch (IOException e) {

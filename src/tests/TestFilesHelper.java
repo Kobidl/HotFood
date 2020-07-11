@@ -35,11 +35,12 @@ public class TestFilesHelper implements TestFilesHelperConsts{
 
 	public static void addUser(String id, String email) {
 		String[] details = {id ,email,"1","Test" ,"0" };
-		String line = System.lineSeparator() + String.join(spliter, details);
+		String line = String.join("\"" + spliter + "\"", details);
 		File f = new File(usersPath);
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
-            bw.append(line);
+            bw.newLine();
+            bw.append("\"" + line + "\"");
             bw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());

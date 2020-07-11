@@ -68,7 +68,7 @@ public class Dish implements DishInterface {
 	    	values.add(options[i]);
 	    }
 	    values.add(String.valueOf(price));
-	    return String.join(",", values);
+	    return String.join("\"" + "," + "\"", values);
 	}
 
 	public String[] cleanOptions() {

@@ -22,7 +22,7 @@ public class DishInCart extends Dish {
 	@Override
 	public String toString() {
 		String value = super.toString();
-		value += "," + resturantId + "," + selectedOption;
+		value += "\"" + "," + "\"" + resturantId + "\"" + "," + "\"" + selectedOption;
 		return value;
 	}
 
