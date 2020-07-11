@@ -46,8 +46,8 @@ public class LoginView extends Observable implements View{
 		
 		public LoginPanel() {
 			setLayout(null);
-			
-			this.setBackground(Color.WHITE);
+			this.setOpaque(false);
+			//this.setBackground(Color.WHITE);
 			this.setBounds(0, 0, 546, 498);
 			
 			loginButton.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -112,11 +112,11 @@ public class LoginView extends Observable implements View{
 			lblNewLabel_5.setBounds(73, 339, 88, 14);
 			add(lblNewLabel_5);
 			
-			JLabel lblNewLabel_6 = new JLabel("HOTFOOD ONLINE");
-			lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_6.setBounds(0, 11, 536, 14);
-			add(lblNewLabel_6);
+//			JLabel lblNewLabel_6 = new JLabel("HOTFOOD ONLINE");
+//			lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 18));
+//			lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+//			lblNewLabel_6.setBounds(0, 11, 536, 14);
+//			add(lblNewLabel_6);
 			
 			JLabel lblNewLabel_7 = new JLabel("Name");
 			lblNewLabel_7.setBounds(73, 306, 46, 14);

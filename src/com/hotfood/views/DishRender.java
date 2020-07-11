@@ -33,11 +33,11 @@ public class DishRender extends JPanel implements ActionListener {
 	public DishRender(int index,Dish dish,DishListView dishesView) {
 		this.dishesView = dishesView;
 		boolean customerMode = dishesView.customerMode(); 
-
+		
 //		this.setBounds(0, 0, 546, 498);
 		this.index = index;
 		JPanel panel = this;
-    	panel.setBackground(Color.white);
+		panel.setBackground(Color.WHITE);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{15, 126, 194, 149, 14, 0};
 		gbl_panel.rowHeights = customerMode ? new int[]{14, 19, 32, 30, 47} : new int[]{14, 19, 32, 30};

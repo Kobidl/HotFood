@@ -24,9 +24,9 @@ public class CartView extends Observable implements View{
 	public CartView() {
 		menu = new JPanel();
 		menu.setBounds(0, 50, 546, 520);
-		menu.setBackground(Color.WHITE);
+		menu.setOpaque(false);
 		innerPanel = new JPanel();
-		innerPanel.setBackground(Color.WHITE);
+		innerPanel.setOpaque(false);
 //		innerPanel.setBounds(0, 0, 546, 498);
 		innerPanel.setVisible(true);
 	    

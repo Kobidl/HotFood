@@ -29,7 +29,7 @@ public class Dish implements DishInterface {
 	}
 	
 	public Dish(String[] details) {
-		if(details.length == 8) {
+		if(details.length == 8 || details.length == 10) {
 			this.id = details[0];
 			this.name = details[1];
 			this.description = details[2];

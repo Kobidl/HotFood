@@ -26,10 +26,10 @@ public class MenuForCustomerView extends Observable implements DishListView{
 	public MenuForCustomerView() {
 		menu = new JPanel();
 		menu.setBounds(0, 50, 546, 520);;
-		menu.setBackground(Color.WHITE);
+		menu.setOpaque(false);
 		innerPanel = new JPanel();
 		innerPanel.setVisible(true);
-	    
+	    innerPanel.setOpaque(false);
 		menu.setLayout(null);
 
 		scroller = new JScrollPane( innerPanel );
@@ -81,7 +81,7 @@ public class MenuForCustomerView extends Observable implements DishListView{
 		Thread scrollTop=new Thread(){
 	          public void run() {
 	              try{
-	                  Thread.sleep(200);
+	                  Thread.sleep(300);
 	                  scroller.setVisible(true);
 	                  scroller.getViewport().setViewPosition( new Point(0, 0) );
 	              } catch(InterruptedException v){System.out.println(v);}

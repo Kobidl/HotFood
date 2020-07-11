@@ -32,7 +32,7 @@ public class ItemInCartView extends JPanel implements ActionListener {
 //		this.setBounds(0, 0, 546, 498);
 		this.index = index;
 		JPanel panel = this;
-    	panel.setBackground(Color.white);
+    	panel.setBackground(Color.WHITE);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{22, 47, 131, 0, 74, 12};
 		gbl_panel.rowHeights = new int[]{14, 19, 38, 0};

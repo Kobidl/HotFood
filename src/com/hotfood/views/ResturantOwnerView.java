@@ -43,7 +43,7 @@ public class ResturantOwnerView extends Observable implements DishListView{
 		
 		panel = new JPanel();
 		panel.setBounds(0, 50, 546, 520);;
-		panel.setBackground(Color.WHITE);
+		panel.setOpaque(false);
 		innerPanel = new JPanel();
 		innerPanel.setVisible(true);
 		panel.setLayout(null);

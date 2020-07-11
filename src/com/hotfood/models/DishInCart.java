@@ -12,7 +12,7 @@ public class DishInCart extends Dish {
 	
 	public DishInCart(String[] details) {
 		super(details);
-		if(details.length >= 10) {
+		if(details.length > 10) {
 			resturantId = details[8];
 			selectedOption = Integer.parseInt(details[9]);
 		}
@@ -28,10 +28,13 @@ public class DishInCart extends Dish {
 
 	public String getSelectedOptionText() {
 		String[] options = super.getOptions();
-		if(options.length > selectedOption && selectedOption > -1)
-			return options[selectedOption];
-		else 
-			return "";
+		if(options!= null) {
+			if(options.length > selectedOption && selectedOption > -1)
+				return options[selectedOption];
+			else 
+				return "";
+		}
+		else return "";
 	}
 	
 	public String getResturantId() {

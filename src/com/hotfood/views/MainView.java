@@ -21,9 +21,13 @@ import com.hotfood.models.MenuForCustomerModel;
 import com.hotfood.models.Restaurant;
 import com.hotfood.models.ResturantOwnerModel;
 import com.hotfood.models.ResturantsModel;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
@@ -34,9 +38,11 @@ public class MainView extends JFrame {
 	JButton cartButton;
 	JButton backButton;
 	JLabel headerLabel;
+	JLabel backlabel;
 	
 	public MainView() {
 		setResizable(false);
+		
 		getContentPane().setBackground(Color.WHITE);
 		this.setTitle("HOTFOOD");
 		this.setBounds(100, 100, 547, 574);
@@ -52,16 +58,24 @@ public class MainView extends JFrame {
 		backButton = new JButton("Back");
 		backButton.setBounds(10, 15, 89, 23);
 		
-		headerLabel = new JLabel("HotFood");
+		headerLabel = new JLabel("HOTFOOD");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		headerLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		headerLabel.setBounds(191, 17, 160, 21);
+		headerLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		headerLabel.setBounds(185, 17, 160, 21);
 				
 		mainModel = new MainModel();
 		MainController mainController = new MainController(this,mainModel);
 		
 		((MainModel) mainModel).addObserver(mainController);
-		
+
+		ImageIcon background=new ImageIcon("background/background.png");
+	    Image img=background.getImage();
+	    Image temp=img.getScaledInstance(650,600,Image.SCALE_SMOOTH);
+	    background=new ImageIcon(temp);
+	    backlabel = new JLabel(background);
+	    backlabel.setLayout(null);
+	    backlabel.setBounds(-20,-20,650,600);
+	    layeredPane.add(backlabel);
 //		layeredPane.add(backButton);
 //		layeredPane.add(cartButton);
 		//layeredPane.add(headerLabel);
@@ -129,6 +143,8 @@ public class MainView extends JFrame {
 				layeredPane.add(backButton);
 			}
 		}
+		if(backlabel!=null)
+			layeredPane.add(backlabel);
 	}
 	
 	public void addCartListener(ActionListener listener) {

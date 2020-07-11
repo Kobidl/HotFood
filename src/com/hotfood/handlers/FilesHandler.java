@@ -153,7 +153,7 @@ public class FilesHandler implements FileHandlerConsts{
 			
 			while (line != null) {
 				String [] details = line.split(spliter);
-				if(details.length == 8) {
+				if(details.length == 8 || details.length == 10) {
 					try {
 						Dish dish = new Dish(details);
 						dishes.add(dish);

@@ -29,7 +29,7 @@ public class ResturantsView extends Observable implements View {
 	public ResturantsView() {
 		panel = new JPanel();
 		panel.setBounds(0, 40, 546, 498);
-		panel.setBackground(Color.WHITE);
+		panel.setOpaque(false);
 		panel.setLayout(null);
 
 		JLabel lblNewLabel_6 = new JLabel("Choose Resturant");
