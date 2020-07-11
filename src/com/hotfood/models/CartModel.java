@@ -7,13 +7,15 @@ import com.hotfood.handlers.FilesHandler;
 
 public class CartModel extends Observable {
 	
-	List<DishInCart> dishes;
+	private List<DishInCart> dishes;
 	private String customerId;
 	
+	//C'tor
 	public CartModel() {
 		
 	}
 	
+	//Initialize 
 	public void	init(Customer customer){
 		this.dishes = customer.getCart();
 		this.customerId = customer.getId();
@@ -23,6 +25,7 @@ public class CartModel extends Observable {
 		return dishes;
 	}
 
+	//Remove item and fire observer
 	public void removeItem(int index) {
 		dishes.remove(index);
 		setChanged();
@@ -30,6 +33,7 @@ public class CartModel extends Observable {
 		FilesHandler.saveCart(dishes,customerId);
 	}
 
+	//fire observer to change panel if dishes in cart
 	public boolean checkout() {
 		boolean status = true;
 		if(this.dishes.size() == 0) {

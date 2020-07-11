@@ -19,12 +19,17 @@ import com.hotfood.models.DishInCart;
 import com.hotfood.models.Menu;
 import com.hotfood.models.User;
 
+
+//Help methods to work with files
 public class FilesHandler implements FileHandlerConsts{
 
+	//In order to handle , inside csv files 
+	//Remove " " from the start and end of word if there are
 	private static String removeQoutes(String s) {
 		return s.replaceAll("^\"+|\"+$", "");
 	}
 	
+	//ReadLine splits and remove " " 
 	private static String[] readLine(String line) {
 		if(line!=null) {
 			line = line.trim();
@@ -45,11 +50,9 @@ public class FilesHandler implements FileHandlerConsts{
 		try {
 			reader = new BufferedReader(new FileReader(usersPath));
 			String line = reader.readLine();
-			
-			while (line != null) {
-			
+			while (line != null) {//Skips empty lines
 				String [] details = readLine(line);
-				if(details.length > 1) {
+				if(details.length >= 5) {//Check if there enough fiels in file
 					String e = details[1];
 					String p = details[2];
 					if(email.equals(e) && (password== null || password.equals(p))) {
@@ -74,11 +77,11 @@ public class FilesHandler implements FileHandlerConsts{
 			reader = new BufferedReader(new FileReader(usersPath));
 			String line = reader.readLine().trim();
 			
-			while (line != null) {
+			while (line != null) {//Skips empty lines
 				String [] details = readLine(line);
 				if(details.length > 1) {
 					String e = details[1];
-					if(email.equals(e)) {
+					if(email.equals(e)) {//Compere emails
 						found = true;
 						break;
 					}
@@ -172,7 +175,7 @@ public class FilesHandler implements FileHandlerConsts{
 			reader = new BufferedReader(new FileReader(path));
 			String line = reader.readLine().trim();
 			
-			while (line != null) {
+			while (line != null) {//Skips empty lines
 				String [] details = readLine(line);
 				if(details.length ==0 ) continue;
 				if(details.length == 8 || details.length == 10) {
@@ -212,11 +215,6 @@ public class FilesHandler implements FileHandlerConsts{
             System.out.println(e.getMessage());
         }
 	}
-	
-	public static void loadMenuFile(File file) {
-	// using scanner file - read file and parse into menu table with 
-		// ability to add or delete dish
-	}
 
 	public static List<Menu> getMenus() {
 		Map<String,String> resturants = getResturants();
@@ -230,7 +228,6 @@ public class FilesHandler implements FileHandlerConsts{
 				menus.add(menu);
 			}
 		}
-		
 		return menus;
 	}
 	

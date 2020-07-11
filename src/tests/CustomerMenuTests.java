@@ -47,6 +47,7 @@ public class CustomerMenuTests {
 	}
 
 	private void compareMenus(Menu menu1,MenuForCustomerModel menu2) {
+		//Asserts
 		assertTrue(menu1.getResturantName().equals(menu2.getResturantName()));
 		assertEquals(menu1.getDishesSize(),menu2.getDishes().size());
 		for(int i=0;i<menu1.getDishesSize();i++) {
@@ -59,7 +60,10 @@ public class CustomerMenuTests {
 	
 	@Test
 	public void getMenuDetails() {
+		//Arrange
 		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
+		
+		//Asserts
 		assertEquals(menu.getResturantName(),menuForCus.getResturantName());
 		assertEquals(menu.getDishesSize(),menuForCus.getDishes().size());
 		compareMenus(menu,menuForCus);
@@ -68,12 +72,17 @@ public class CustomerMenuTests {
 
 	@Test
 	public void addItemFromMenu() {
+		//Arrange
 		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
 		userId = UUID.randomUUID().toString();
 		int selectedOption = 1;
-		menuForCus.addItem(0, selectedOption, userId);
 		
+		//Act 
+		menuForCus.addItem(0, selectedOption, userId);
+
 		List<DishInCart> cart = FilesHandler.getCartData(userId);
+		
+		//Asserts
 		assertEquals("Failed to find user cart data",1, cart.size());
 		DishInCart dish = cart.get(0);
 		assertEquals(dish.getResturantId(),menu.getResturantId());
@@ -81,7 +90,9 @@ public class CustomerMenuTests {
 		compereDishes(menu.getDish(0),dish);
 	}
 	
-	public void compereDishes(Dish dish1,Dish dish2) {
+	//Asserts help method
+	private void compereDishes(Dish dish1,Dish dish2) {
+		//Asserts 
 		assertEquals(dish1.getId(),dish2.getId());
 		assertEquals(dish1.getName(),dish2.getName());
 		assertEquals(dish1.getDescription(),dish2.getDescription());
@@ -91,18 +102,20 @@ public class CustomerMenuTests {
 	
 	@Test
 	public void checkHalfEmptyOptions() {
+		//Arrange
 		String resturantId = UUID.randomUUID().toString();
 		String resturantName = resName;
 		List<Dish> dishes = new ArrayList<Dish>() {};
 		String[] options = new String[] {"test1","test2","",""};
-
 		String dishId = UUID.randomUUID().toString();
 		Dish dish = new Dish(dishId,"Dish test","Dish for testing",options,10.4);
 		dishes.add(dish);
-
+		
+		//Act
 		Menu menu = new Menu(resturantId, resturantName, dishes);
 		MenuForCustomerModel menuForCus = new MenuForCustomerModel(menu);
 		String[] cleanOptions = menuForCus.getDishes().get(0).cleanOptions();
+		//Asserts
 		assertEquals("Something wrong with cleaning the filters",2, cleanOptions.length);
 	}
 	

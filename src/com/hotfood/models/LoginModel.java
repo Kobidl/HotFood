@@ -11,6 +11,7 @@ import com.hotfood.interfaces.Model;
 
 public class LoginModel extends Observable implements Model {
 	
+	//C'tor
 	public User login(String loginEmail, String loginPassword) {
 		User user = getLoginUser(loginEmail, loginPassword);
 		setChanged();
@@ -18,7 +19,7 @@ public class LoginModel extends Observable implements Model {
 		return user;
 	}
 	
-	
+	//Get user from file if exists and right details
 	private User getLoginUser(String e,String p) {
 		User user = null;
 		String email = e.trim();
@@ -31,6 +32,7 @@ public class LoginModel extends Observable implements Model {
 		return user;
 	}
 	
+	//register return status
 	public RegisterStatus register(String e,String p,int type,String n) {
 		RegisterStatus status = getRegisterStatus(e,p,type,n);
 		setChanged();
@@ -38,6 +40,8 @@ public class LoginModel extends Observable implements Model {
 		return status;
 	}
 	
+	
+	//Check if details OK. write to file and return status.
 	private RegisterStatus getRegisterStatus(String e,String p,int type,String n) {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
 				"[a-zA-Z0-9_+&*-]+)*@" + 

@@ -8,14 +8,17 @@ import com.hotfood.interfaces.Model;
 public class MenuForCustomerModel extends Observable implements Model  {
 	private Menu menu;
 	
+	//C'tor
 	public MenuForCustomerModel(Menu menu) {
 		init(menu);
 	}
 	
+	//Initialize
 	public void init(Menu menu) {
 		this.menu = menu;
 	}
 
+	//Add item, updates the file and notify observer
 	public void addItem(int index,int selectedOption,String customerId) {
 		Dish dish = this.menu.getDish(index);
 		DishInCart dishInCart = new DishInCart(dish,selectedOption,menu.getResturantId());

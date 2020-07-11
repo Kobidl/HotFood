@@ -12,6 +12,8 @@ public class Dish implements DishInterface {
 	private String[] options;
 	private double price;
 	
+	
+	//C'tor
 	public Dish(String id,String name,String description,String[] options,double price) {
 		this.id = id;
 		this.name = name;
@@ -28,6 +30,7 @@ public class Dish implements DishInterface {
 		this.price = dish.getPrice();
 	}
 	
+	//C'tor from file
 	public Dish(String[] details) {
 		if(details.length == 8 || details.length == 10) {
 			this.id = details[0];
@@ -58,6 +61,7 @@ public class Dish implements DishInterface {
 		return this.price;
 	}
 	
+	//return line for file
 	@Override
 	public String toString() {
 		ArrayList<String> values = new ArrayList<String>();
@@ -71,6 +75,7 @@ public class Dish implements DishInterface {
 	    return String.join("\"" + "," + "\"", values);
 	}
 
+	//Return options without empty options
 	public String[] cleanOptions() {
 		List<String> list = new ArrayList<String>();
 		for(int i=0;i<this.options.length;i++) {

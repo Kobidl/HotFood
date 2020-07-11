@@ -18,6 +18,7 @@ public class MainModel extends Observable implements MainModelInterface {
 	private Restaurant restaurant;
 	private List<Map.Entry<WindowStates, Object>> history;
 	
+	//C'tor
 	public MainModel() {
 		this.state = WindowStates.Login;
 		initHistory();
@@ -28,6 +29,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		initHistory();
 	}
 	
+	//Initialize history
 	private void initHistory() {
 		history = new ArrayList<Map.Entry<WindowStates, Object>>();
 	}
@@ -51,6 +53,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		notifyObservers(this.state);
 	}
 	
+	//Check history dictionary. if have parameter fire param else fire state
 	public void goBack() {
 		Object param = null;
 		if(this.history.size() > 0) {
@@ -70,9 +73,12 @@ public class MainModel extends Observable implements MainModelInterface {
 		}
 	}
 	
+	//Add key value to dictionary when no parameter
 	private void addToHistory() {
 		history.add(new AbstractMap.SimpleEntry<WindowStates, Object>(this.state,null));
 	}
+	
+	//Add key value to dictionary with parameter	
 	private void addToHistory(Object o) {
 		history.add(new AbstractMap.SimpleEntry<WindowStates, Object>(this.state,o));
 	}
@@ -98,7 +104,6 @@ public class MainModel extends Observable implements MainModelInterface {
 
 	public void addItemToCart(DishInCart dish) {
 		customer.addDishToCart(dish);
-		
 	}
 
 	public void goToResturantPage(Restaurant resturant) {
@@ -119,6 +124,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		notifyObservers(WindowStates.Order);
 	}
 
+	//Fires user checked out successfully
 	public void checkOutOrder() {
 		initHistory();
 		this.state = WindowStates.Resturants;
@@ -127,6 +133,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		notifyObservers(this.state);
 	}
 
+	//Logout - reset all user details and move to login view
 	public void logOut() {
 		if(this.customer != null) {
 			this.customer = null;
@@ -137,8 +144,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		initHistory();
 		this.state = WindowStates.Login;
 		setChanged();
-		notifyObservers(this.state);
-		
+		notifyObservers(this.state);	
 	}
 
 }

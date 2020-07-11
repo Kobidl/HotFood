@@ -11,6 +11,7 @@ public class User implements UserInterface {
 	private String name;
 	private UserType type;
 	
+	//C'tor
 	public User(User user) {
 		init(user.getId(),user.getEmail(),user.getPassword(),user.getName(),user.getType());
 	}
@@ -27,6 +28,8 @@ public class User implements UserInterface {
 		this.name = name;
 		this.type = userType;
 	}
+	
+	//Get & Sets
 	
 	@Override
 	public String getId() {

@@ -35,21 +35,21 @@ public class LoginController implements Controller {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof LoginModel) {
-			if(arg instanceof RegisterStatus) {
+		if(o instanceof LoginModel) {//Fires from model after login logic
+			if(arg instanceof RegisterStatus) { //Register callback
 				registerCallback((RegisterStatus)arg);
 			}
-			else if(arg instanceof User) {
+			else if(arg instanceof User) {//Login callback
 				loginCallback((User) arg);
-			}else {
+			}else {// General error callback
 				JOptionPane.showMessageDialog(null,"Something went wrong. Please check your details and try again.");
 			}
-		}else if(o instanceof LoginView) {
+		}else if(o instanceof LoginView) {//Events fire from view
 			if( arg instanceof ActionEvent) {
 				ActionEvent event = (ActionEvent)arg;
-				if(event.getActionCommand() == "Login") {
+				if(event.getActionCommand() == "Login") {//If "Login" button clicked
 					loginModel.login(loginView.getLoginEmail(), loginView.getLoginPassword());
-				}else if(event.getActionCommand() == "Register") {
+				}else if(event.getActionCommand() == "Register") {//If "Register" button clicked
 					loginModel.register( loginView.getRegisterEmail(), loginView.getRegisterPassword(), loginView.getSelectedUserType(),loginView.getRegisterName());
 				}
 			}
@@ -57,7 +57,7 @@ public class LoginController implements Controller {
 	}
 	
 	private void loginCallback(User user) {
-		if(user == null) {
+		if(user == null) {//User null -> display error
 			JOptionPane.showMessageDialog(null,"Something went wrong. Please check your details and try again.");
 		}
 		if(user!=null && user.getType() == UserType.Customer) {

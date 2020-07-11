@@ -12,14 +12,17 @@ public class OrderModel extends Observable implements OrderModelInterface {
 	
 	private Customer customer;
 	
+	//C'tor
 	public OrderModel(Customer customer) {
 		this.customer = customer;
 	}
 	
+	//Initialize 
 	public int getItemsCount() {
 		return this.customer.getCart().size();
 	}
 	
+	//Check details. If OK write to file. if not OK return status. notify observer
 	public SaveOrderStatus saveOrder(String firstName,String lastName,String city,String street,String floor,String apartment,DeliveryOption delivery){
 		SaveOrderStatus status = SaveOrderStatus.SUCCESS;
 		firstName = firstName.trim();

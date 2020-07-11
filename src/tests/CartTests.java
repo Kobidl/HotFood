@@ -39,9 +39,13 @@ class CartTests {
 	
 	@Test
 	void checkCart() {
+		//Arrange
 		CartModel cart = new CartModel();
+		
+		//Act
 		cart.init(customer);
 		
+		//Assert
 		assertEquals(1,cart.getDishes().size(),"Failed to load cart dishes");
 	}
 	

@@ -9,6 +9,7 @@ import com.hotfood.interfaces.RestaurantInterface;
 public class Restaurant extends User implements RestaurantInterface {
 	private Menu menu;
 	
+	//C'tor
 	public Restaurant(String id,String email,String password,String name){
 		super(id,email,password,name,"0");		
 		initMenu();

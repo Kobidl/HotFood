@@ -15,36 +15,39 @@ import com.hotfood.views.ResturantsView;
 public class ResturantsController implements Controller {
 
 	private ResturantsView resturantsView;
-	ResturantsModel resturantsModel;
-	MainModel mainModel;
+	private ResturantsModel resturantsModel;
+	private MainModel mainModel;
 	
-	
+	//C'tor
 	public ResturantsController(ResturantsView resturantsPane, ResturantsModel resturantsModel, MainModel mainModel) {
 		this.resturantsView = resturantsPane;
 		this.resturantsModel = resturantsModel;
 		this.mainModel = mainModel;
-		resturantsPane.addEnterResturantListener(new EnterResturantListener());
+		
 		this.init();
 	}
 	
+	//Initialize
 	public void init() {
-		//this.resturantsModel.load();
+		//init table
 		this.resturantsView.addTableModel(resturantsModel);
+		
+		//Add buttons listeners
+		this.resturantsView.addEnterResturantListener(new EnterResturantListener());
 		this.resturantsView.addListSectionListener(new ResturantsListListener());
 	}
 	
 	class ResturantsListListener implements ListSelectionListener{
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			if (!e.getValueIsAdjusting()) 
+			if (!e.getValueIsAdjusting())//Check if first time selected -> allow "Enter" button 
 				resturantsView.setEnterResturantsEnable(true);
 		}
 	}
 	
 	class EnterResturantListener implements ActionListener{
-
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) {//Enter button fires -> go to menu
 			int selectedRow = resturantsView.getTableSelectedRow();
 			Menu menu = resturantsModel.getMenuAt(selectedRow);
 			mainModel.goToCutomerMenu(menu);

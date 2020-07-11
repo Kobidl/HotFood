@@ -12,11 +12,22 @@ public class ResturantsModel extends DefaultTableModel {
 	private static final Object[] TABLE_HEADER = { "Resturant Name"};
 	private List<Menu> resturants;
 	
+	
+	//C'tor
 	public ResturantsModel() {
 		super(DATA,TABLE_HEADER);
 		this.load();
 	}
 	
+	private void load() {
+		this.resturants = FilesHandler.getMenus();
+		Object[][] newData = new Object[resturants.size()][];
+		for (int i = 0; i < this.resturants.size(); i++) {
+			Menu menu = this.resturants.get(i);
+			newData[i] = new Object[]{menu.getResturantName()};
+		}
+		this.setDataVector(newData, TABLE_HEADER);
+	}
 	
     @Override
     public boolean isCellEditable(int row, int column) {
@@ -27,16 +38,7 @@ public class ResturantsModel extends DefaultTableModel {
     public List<Menu> getResturants() {
     	return this.resturants;
     }
-    
-	public void load() {
-		this.resturants = FilesHandler.getMenus();
-		Object[][] newData = new Object[resturants.size()][];
-		for (int i = 0; i < this.resturants.size(); i++) {
-			Menu menu = this.resturants.get(i);
-			newData[i] = new Object[]{menu.getResturantName()};
-		}
-		this.setDataVector(newData, TABLE_HEADER);
-	}
+  
 	
 	public Menu getMenuAt(int index) {
 		return this.resturants.get(index);

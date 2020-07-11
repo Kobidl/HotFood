@@ -34,13 +34,6 @@ class LoginTests {
 	}
 	
 	@Test
-	void validLogin() {
-		User user = loginModel.login("1", "1");
-		assertNotNull(user);
-		user.getName();
-	}
-	
-	@Test
 	void emptyLogin() {
 		User user = loginModel.login("", "");
 		assertNull(user);

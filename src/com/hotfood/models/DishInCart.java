@@ -4,12 +4,14 @@ public class DishInCart extends Dish {
 	private int selectedOption;
 	private String resturantId;
 	
+	//Ct'or
 	public DishInCart(Dish dish,int selectedOption,String resturantId) {
 		super(dish);
 		this.selectedOption = selectedOption;
 		this.resturantId = resturantId;
 	}
 	
+	//C'tor from files
 	public DishInCart(String[] details) {
 		super(details);
 		if(details.length >= 10) {
@@ -19,6 +21,7 @@ public class DishInCart extends Dish {
 		
 	}
 
+	//To print line in file
 	@Override
 	public String toString() {
 		String value = super.toString();

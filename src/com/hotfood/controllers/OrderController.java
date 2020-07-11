@@ -20,6 +20,7 @@ public class OrderController implements Controller  {
 	OrderModel orderModel;
 	MainModel mainModel;
 	
+	//C'tor
 	public OrderController(OrderView orderView, OrderModel orderModel,MainModel mainModel) {
 		this.orderView = orderView;
 		this.orderModel = orderModel;
@@ -27,9 +28,10 @@ public class OrderController implements Controller  {
 		this.orderView.setItemsCount(orderModel.getItemsCount());
 	}
 
+	//Observer
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof OrderView) {
+		if(o instanceof OrderView) {//Update from view
 			String name = this.orderView.getName();
 			String lastName = this.orderView.getLastName();
 			String city = this.orderView.getCity();
@@ -38,8 +40,8 @@ public class OrderController implements Controller  {
 			String apartment = this.orderView.getApartment();
 			DeliveryOption delivery = this.orderView.takeAwaySelected() ? DeliveryOption.TAKEAWAY : DeliveryOption.DELVEIERY;
 			this.orderModel.saveOrder(name,lastName,city,street,floor,apartment,delivery);
-		}else if(o instanceof OrderModel) {
-			if(arg instanceof SaveOrderStatus) {
+		}else if(o instanceof OrderModel) { //Update from Model
+			if(arg instanceof SaveOrderStatus) { //Check the save order status->fire message of the status
 				switch((SaveOrderStatus) arg) {
 				case BAD_NAME:
 					JOptionPane.showMessageDialog(null,"Bad name.");

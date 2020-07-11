@@ -16,6 +16,7 @@ public class CartController implements Controller  {
 	private CartModel model;
 	private MainModel mainModel;
 	
+	//C'tor
 	public CartController(CartView view, CartModel model, MainModel mainModel) {
 		this.view = view;
 		this.model = model;
@@ -23,27 +24,29 @@ public class CartController implements Controller  {
 		init();
 	}
 	
+	//Init
 	private void init() {
 		model.init(mainModel.getCustomer());
 		view.printItems(model.getDishes());
 	}
 
+	//Observer
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof CartView) {
-			if(arg instanceof Integer) {
+		if(o instanceof CartView) { //Fire from view
+			if(arg instanceof Integer) { //Case when remove item fire
 				model.removeItem((int) arg);
-			}else {				
+			}else { //Case when checkout button fire
 				model.checkout();
 			}
-		}else if(o instanceof CartModel) {
+		}else if(o instanceof CartModel) { //Fire from Model
 			if(arg instanceof Boolean) {
-				if((Boolean) arg) {
+				if((Boolean) arg) { //If can go to cart -> moving to cart
 					this.mainModel.goToOrder();
-				}else {
+				}else { //Can't go to cart -> show message
 					JOptionPane.showMessageDialog(null,"You must have at least 1 item in the cart to continue");
 				}
-			}else {
+			}else { //Updates UI on Dishes
 				view.printItems(model.getDishes());
 			}
 		}
