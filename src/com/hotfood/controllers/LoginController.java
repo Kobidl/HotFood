@@ -80,7 +80,7 @@ public class LoginController implements Controller {
 			message = "Bad email, please try again";
 			break;
 		case BadPassword:
-			message = "Password must have minimum 5 letters, please try again";
+			message = "Password must have minimum 6 letters, please try again";
 			break;
 		case BadName:
 			message = "Bad name, please try again";

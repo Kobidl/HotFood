@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.hotfood.enums.DeliveryOption;
 import com.hotfood.models.Dish;
 import com.hotfood.models.DishInCart;
 import com.hotfood.models.Menu;
@@ -296,5 +297,11 @@ public class FilesHandler implements FileHandlerConsts{
 		
 		dishes = getMenuDishes(file.getPath());
 		return dishes;
+	}
+
+	public static void saveOrder(String firstName, String lastName, String city, String street, String floor,
+			String apartment, DeliveryOption delivery) {
+
+		
 	}
 }

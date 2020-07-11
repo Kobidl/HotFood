@@ -20,7 +20,7 @@ public class MainController implements Controller {
 		this.mainModel = mainModel;
 		mainView.addCartListener(new GotoCartListener());
 		mainView.addBackButtonListener(new BackListener());
-		this.mainView.switchWindow(WindowStates.Login,null);
+		this.mainView.switchWindow(WindowStates.Order,null);
 	}
 	
 	

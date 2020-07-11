@@ -6,6 +6,7 @@ public enum WindowStates {
 	MenuForCustomer, 
 	Cart,
 	Menu,
-	ResturantOwner
+	ResturantOwner,
+	Order
 	
 }

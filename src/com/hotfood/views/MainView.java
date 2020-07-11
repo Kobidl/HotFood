@@ -10,6 +10,7 @@ import com.hotfood.controllers.CartController;
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
 import com.hotfood.controllers.MenuForCustomerController;
+import com.hotfood.controllers.OrderController;
 import com.hotfood.controllers.ResturantOwnerController;
 import com.hotfood.controllers.ResturantsController;
 import com.hotfood.enums.WindowStates;
@@ -18,6 +19,7 @@ import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
+import com.hotfood.models.OrderModel;
 import com.hotfood.models.Restaurant;
 import com.hotfood.models.ResturantOwnerModel;
 import com.hotfood.models.ResturantsModel;
@@ -125,6 +127,14 @@ public class MainView extends JFrame {
 				((ResturantOwnerModel) resOwnModel).addObserver(resOwnController);
 				layeredPane.add(resOwnView.getView());
 				break;
+			case Order:
+				OrderView orderView = new OrderView();
+				OrderModel orderModel = new OrderModel(mainModel.getCustomer());
+				OrderController orderController = new OrderController(orderView,orderModel);
+				((OrderModel)orderModel).addObserver(orderController);
+				((OrderView)orderView).addObserver(orderController);
+				
+				layeredPane.add(orderView.getView());
 			default:
 				break;
 		}
