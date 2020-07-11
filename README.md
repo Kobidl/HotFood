@@ -14,5 +14,5 @@ Swing , MCV , Observers , Files
 - Checkout order
 - Load menu as restaurant owner
 
-###Contributing
+### Contributing
 Kobi Dalal (@Kobidl) , Koral Mazor (@KoralMazor)
