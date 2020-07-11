@@ -12,7 +12,7 @@ public class DishInCart extends Dish {
 	
 	public DishInCart(String[] details) {
 		super(details);
-		if(details.length > 10) {
+		if(details.length >= 10) {
 			resturantId = details[8];
 			selectedOption = Integer.parseInt(details[9]);
 		}

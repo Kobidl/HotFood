@@ -80,7 +80,7 @@ class LoginTests {
 	
 	@Test
 	void registerResturantAndLogin() {
-		RegisterStatus status = loginModel.register(email, password, 0, name);
+		RegisterStatus status = loginModel.register(email, password, 1, name);
 		assertEquals(RegisterStatus.Success, status,"User not created altought suppose to be created");
 		
 		User user = loginModel.login(email, password);

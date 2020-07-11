@@ -22,6 +22,7 @@ public class OrderModel extends Observable implements OrderModelInterface {
 	
 	public SaveOrderStatus saveOrder(String firstName,String lastName,String city,String street,String floor,String apartment,DeliveryOption delivery){
 		SaveOrderStatus status = SaveOrderStatus.SUCCESS;
+		
 		if(firstName.isEmpty()) {
 			status = SaveOrderStatus.BAD_NAME;
 		}

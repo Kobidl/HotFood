@@ -76,7 +76,7 @@ public class CustomerMenuTests {
 		List<DishInCart> cart = FilesHandler.getCartData(userId);
 		assertEquals("Failed to find user cart data",1, cart.size());
 		DishInCart dish = cart.get(0);
-		assertEquals(dish.getResturantId(),(menu.getResturantId()));
+		assertEquals(dish.getResturantId(),menu.getResturantId());
 		assertEquals(menu.getDish(0).getOptions()[selectedOption],dish.getSelectedOptionText());
 		compereDishes(menu.getDish(0),dish);
 	}
