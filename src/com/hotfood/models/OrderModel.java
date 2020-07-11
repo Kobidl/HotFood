@@ -6,8 +6,9 @@ import java.util.Observable;
 import com.hotfood.enums.DeliveryOption;
 import com.hotfood.enums.SaveOrderStatus;
 import com.hotfood.handlers.FilesHandler;
+import com.hotfood.interfaces.OrderModelInterface;
 
-public class OrderModel extends Observable {
+public class OrderModel extends Observable implements OrderModelInterface {
 	
 	private Customer customer;
 	
