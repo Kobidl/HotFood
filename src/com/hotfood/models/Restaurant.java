@@ -9,7 +9,7 @@ public class Restaurant extends User {
 	private Menu menu;
 	
 	public Restaurant(String id,String email,String password,String name){
-		super(id,email,password,"0",name);		
+		super(id,email,password,name,"0");		
 		initMenu();
 	}
 	

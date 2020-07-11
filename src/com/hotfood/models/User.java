@@ -11,21 +11,23 @@ public class User implements UserInterface {
 	private String name;
 	private UserType type;
 	
+	public User(User user) {
+		init(user.getId(),user.getEmail(),user.getPassword(),user.getName(),user.getType());
+	}
+
+	
 	public User(String id,String email,String password,String name,String userType) {
+		init(id,email, password, name, (userType == "0" ? UserType.Resturant : UserType.Resturant));
+	}
+	
+	private void init(String id,String email,String password,String name,UserType userType){
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.type = userType.equals("0") ? UserType.Resturant : UserType.Customer;
+		this.type = userType;
 	}
 	
-	public User(User user) {
-		this.id = user.getId();
-		this.email = user.getEmail();
-		this.password = user.getPassword();
-		this.type = user.getType();
-	}
-
 	@Override
 	public String getId() {
 		return this.id;
