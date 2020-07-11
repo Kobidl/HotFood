@@ -107,13 +107,15 @@ public class ResturantOwnerView extends Observable implements DishListView{
 		this.scroller.setVisible(false);
 		activeDeactiveButtons(true);
 		this.innerPanel.removeAll();
-		for(int i=0;i<dishes.size();i++) {
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.insets = new Insets(0, 0, 5, 0);
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
-			gbc_panel.gridy = i+1;
-			this.innerPanel.add(new DishRender(i,dishes.get(i),this),gbc_panel);
+		if(dishes != null) {
+			for(int i=0;i<dishes.size();i++) {
+				GridBagConstraints gbc_panel = new GridBagConstraints();
+				gbc_panel.insets = new Insets(0, 0, 5, 0);
+				gbc_panel.fill = GridBagConstraints.BOTH;
+				gbc_panel.gridx = 1;
+				gbc_panel.gridy = i+1;
+				this.innerPanel.add(new DishRender(i,dishes.get(i),this),gbc_panel);
+			}
 		}
 		
 		this.innerPanel.repaint();
