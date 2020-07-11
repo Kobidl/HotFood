@@ -16,7 +16,7 @@ public class User implements UserInterface {
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.type = userType == "0" ? UserType.Resturant : UserType.Customer;
+		this.type = userType.equals("0") ? UserType.Resturant : UserType.Customer;
 	}
 	
 	public User(User user) {

@@ -10,7 +10,6 @@ public class Menu implements MenuInterface {
 	private String resturantName;
 	private List<Dish> dishes;
 	
-	
 	public Menu(String resturantId,String resturantName,List<Dish> dishes) {
 		this.resturantId = resturantId;
 		this.resturantName = resturantName;
@@ -36,8 +35,12 @@ public class Menu implements MenuInterface {
 		return this.dishes;
 	}
 
-
 	public Dish getDish(int index) {
 		return	this.dishes.get(index);
 	}
+
+	public void setDishes(List<Dish> dishes) {
+		this.dishes = dishes;
+	}
+
 }

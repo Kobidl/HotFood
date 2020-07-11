@@ -1,11 +1,12 @@
 package com.hotfood.handlers;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +18,8 @@ import com.hotfood.models.DishInCart;
 import com.hotfood.models.Menu;
 import com.hotfood.models.User;
 
-public class FilesHandler {
-	private final static String spliter = ",";
-	private final static String extention = ".csv";
-	private final static String usersPath = "data/users.csv";
-	private final static String cartsPath = "data/carts/";
-	private final static String menusPath = "data/menus/";
-	
+public class FilesHandler implements FileHandlerConsts{
+
 	public static User getUserFromUsers(String email,String password) {
 		User user = null;
 		BufferedReader reader;
@@ -77,7 +73,7 @@ public class FilesHandler {
 		return found;
 	}
 	
-	public static boolean createNewUser(String email,String password,int type,String name) {
+	public static boolean createNewUser(String email,String password,String name,int type) {
 		UUID uuid = UUID.randomUUID();
 		String[] details = {uuid.toString() ,email,password,name ,Integer.toString(type) };
 		String line = System.lineSeparator() + String.join(spliter, details);
@@ -144,6 +140,7 @@ public class FilesHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return resturants;
 	}
 	
@@ -156,9 +153,14 @@ public class FilesHandler {
 			
 			while (line != null) {
 				String [] details = line.split(spliter);
-				Dish dish = new Dish(details);
-				dishes.add(dish);
+				if(details.length == 8) {
+					try {
+						Dish dish = new Dish(details);
+						dishes.add(dish);
+					}
+					catch(Exception e) {}
 				// read next line
+				}
 				line = reader.readLine();
 			}
 			reader.close();
@@ -166,6 +168,28 @@ public class FilesHandler {
 			e.printStackTrace();
 		}
 		return dishes;
+	}
+
+	
+	public static void saveMenu(Menu menu) {
+		File f = new File (menusPath + menu.getResturantId() + extention);
+		 try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f, false));
+            for(int i=0;i<menu.getDishes().size();i++) {
+				 if(i>0)
+					 bw.newLine();
+				 bw.append(menu.getDish(i).toString());
+			 }
+
+            bw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+	}
+	
+	public static void loadMenuFile(File file) {
+	// using scanner file - read file and parse into menu table with 
+		// ability to add or delete dish
 	}
 
 	public static List<Menu> getMenus() {
@@ -197,6 +221,7 @@ public class FilesHandler {
 			}
 		}
 		return f;
+
 	}
 
 	public static boolean addDishToCart(DishInCart dishInCart, String customerId) {
@@ -238,5 +263,33 @@ public class FilesHandler {
            return;
        }
 		
+	}
+
+	public static Menu getMenu(String id,String name) {
+		Menu menu = null;
+		String path = menusPath + id + extention;
+		File f = new File(path);
+		if(f.exists() && !f.isDirectory()) { 
+			List<Dish> dishes = getMenuDishes(path);
+			menu = new Menu(id,name,dishes);
+		}else {
+			try {
+				f.createNewFile();
+				menu = new Menu(id,name,new ArrayList<Dish>());
+			} catch (IOException e) {
+				System.out.print("Failed to create cart for user");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return menu;
+	}
+
+	public static List<Dish> loadMenu(String id, String name, File file) {
+		List<Dish> dishes = null;
+		if(!file.getName().endsWith(".csv")) return null;
+		
+		dishes = getMenuDishes(file.getPath());
+		return dishes;
 	}
 }
