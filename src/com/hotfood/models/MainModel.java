@@ -83,4 +83,19 @@ public class MainModel extends Observable implements MainModelInterface {
 		return this.restaurant;
 	}
 
+	public void goToOrder() {
+		this.history.add(this.state);
+		this.state = WindowStates.Order;
+		setChanged();
+		notifyObservers(WindowStates.Order);
+	}
+
+	public void checkOutOrder() {
+		this.history = new ArrayList<WindowStates>();
+		this.state = WindowStates.Resturants;
+		this.customer.cleanCart();
+		setChanged();
+		notifyObservers(this.state);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.hotfood.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hotfood.handlers.FilesHandler;
@@ -29,5 +30,11 @@ public class Customer extends User implements CustomerInterface {
 
 	public void addDishToCart(DishInCart dish) {
 		this.cart.add(dish);
+	}
+
+	public void cleanCart() {
+		this.cart = new ArrayList<DishInCart>();
+		FilesHandler.saveCart(this.cart, super.getId());
+
 	}
 }

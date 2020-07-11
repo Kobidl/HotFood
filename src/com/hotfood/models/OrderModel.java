@@ -41,7 +41,7 @@ public class OrderModel extends Observable implements OrderModelInterface {
 			status = SaveOrderStatus.BAD_APARTMENT;
 		}
 		
-		FilesHandler.saveOrder(firstName,lastName,city,street,floor,apartment,delivery);
+		FilesHandler.saveOrder(this.customer.getId(),this.customer.getCart(),firstName,lastName,city,street,floor,apartment,delivery);
 		
 		setChanged();
 		notifyObservers(status);

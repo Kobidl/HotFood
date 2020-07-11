@@ -14,12 +14,16 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Point;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CartView extends Observable implements View{
 	private JPanel menu;
 	private JPanel innerPanel;
 	private JScrollPane scroller;
 	private JLabel menuHeaderLabel;
+	private JButton btnNewButton;
 	
 	public CartView() {
 		menu = new JPanel();
@@ -40,7 +44,7 @@ public class CartView extends Observable implements View{
 		gbl_innerPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		innerPanel.setLayout(gbl_innerPanel);
 		
-		scroller.setBounds(10, 22, 512, 460);
+		scroller.setBounds(20, 51, 512, 431);
 		scroller.getViewport().setViewPosition(new Point(0,0));
 		scroller.setVisible(false);
 		scroller.getVerticalScrollBar().setUnitIncrement(16);
@@ -50,8 +54,18 @@ public class CartView extends Observable implements View{
 		menuHeaderLabel = new JLabel("Cart");
 		menuHeaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		menuHeaderLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		menuHeaderLabel.setBounds(197, 0, 148, 19);
+		menuHeaderLabel.setBounds(10, 16, 148, 19);
 		menu.add(menuHeaderLabel);
+		
+		btnNewButton = new JButton("Checkout");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setChanged();
+				notifyObservers();
+			}
+		});
+		btnNewButton.setBounds(433, 17, 89, 23);
+		menu.add(btnNewButton);
 		
 	}
 	

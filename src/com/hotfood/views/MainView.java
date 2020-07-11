@@ -130,11 +130,11 @@ public class MainView extends JFrame {
 			case Order:
 				OrderView orderView = new OrderView();
 				OrderModel orderModel = new OrderModel(mainModel.getCustomer());
-				OrderController orderController = new OrderController(orderView,orderModel);
+				OrderController orderController = new OrderController(orderView,orderModel,mainModel);
 				((OrderModel)orderModel).addObserver(orderController);
 				((OrderView)orderView).addObserver(orderController);
-				
 				layeredPane.add(orderView.getView());
+				break;
 			default:
 				break;
 		}
@@ -146,7 +146,7 @@ public class MainView extends JFrame {
 	public void printHeader(WindowStates state) {
 		layeredPane.add(headerLabel);
 		if(state!= WindowStates.Login && state != WindowStates.ResturantOwner) {
-			if(state != WindowStates.Cart) {
+			if(state != WindowStates.Cart && state != WindowStates.Order) {
 				layeredPane.add(cartButton);
 			}
 			if(state != WindowStates.Resturants) {

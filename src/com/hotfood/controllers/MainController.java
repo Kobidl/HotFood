@@ -42,14 +42,8 @@ public class MainController implements Controller {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof MainModel) {
-			if(arg == WindowStates.Resturants) {
-				this.mainView.switchWindow(WindowStates.Resturants,null);
-			}
-			else if(arg == WindowStates.Cart) {
-				this.mainView.switchWindow(WindowStates.Cart,null);
-			}
-			else if(arg == WindowStates.ResturantOwner) {
-				this.mainView.switchWindow(WindowStates.ResturantOwner,null);
+			if(arg instanceof WindowStates) {
+				this.mainView.switchWindow((WindowStates)arg, null);
 			}
 			else if(arg instanceof Menu ) {
 				this.mainView.switchWindow(WindowStates.MenuForCustomer,arg);

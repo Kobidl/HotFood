@@ -29,4 +29,14 @@ public class CartModel extends Observable {
 		notifyObservers();
 		FilesHandler.saveCart(dishes,customerId);
 	}
+
+	public boolean checkout() {
+		boolean status = true;
+		if(this.dishes.size() == 0) {
+			status = false;
+		}
+		setChanged();
+		notifyObservers(status);
+		return status;	
+	}
 }

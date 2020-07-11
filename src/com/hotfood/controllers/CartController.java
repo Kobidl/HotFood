@@ -3,6 +3,8 @@ package com.hotfood.controllers;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import com.hotfood.interfaces.Controller;
 import com.hotfood.models.CartModel;
 import com.hotfood.models.MainModel;
@@ -31,9 +33,15 @@ public class CartController implements Controller  {
 		if(o instanceof CartView) {
 			if(arg instanceof Integer) {
 				model.removeItem((int) arg);
+			}else {
+				model.checkout();
 			}
 		}else if(o instanceof CartModel) {
-			view.printItems(model.getDishes());
+			if(arg instanceof Boolean) {
+				this.mainModel.goToOrder();
+			}else {
+				view.printItems(model.getDishes());
+			}
 		}
 	}
 	

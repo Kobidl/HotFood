@@ -101,9 +101,10 @@ public class FilesHandler implements FileHandlerConsts{
 			BufferedReader reader;
 			try {
 				reader = new BufferedReader(new FileReader(path));
-				String line = reader.readLine().trim();
+				String line = reader.readLine();
 				
 				while (line != null) {
+					line = line.trim();
 					if(!line.isEmpty()) {
 						String [] details = line.split(spliter);
 						DishInCart dish = new DishInCart(details);
@@ -299,9 +300,21 @@ public class FilesHandler implements FileHandlerConsts{
 		return dishes;
 	}
 
-	public static void saveOrder(String firstName, String lastName, String city, String street, String floor,
+	public static void saveOrder(String customerId,List<DishInCart> dishes,String firstName, String lastName, String city, String street, String floor,
 			String apartment, DeliveryOption delivery) {
-		
+		File f = new File (ordersPath + UUID.randomUUID().toString() + extention);
+		 try {
+           BufferedWriter bw = new BufferedWriter(new FileWriter(f, false));
+           String [] line = new String[]{customerId,firstName,lastName,city,street,floor,apartment,delivery.toString()};
+           bw.write(String.join(spliter, line));
+           for(int i=0;i<dishes.size();i++) {
+    	   	 	bw.newLine();
+    	   	 	bw.append(dishes.get(i).toString());
+			 }
+           bw.close();
+       } catch (IOException e) {
+           System.out.println(e.getMessage());
+       }
 		
 	}
 }

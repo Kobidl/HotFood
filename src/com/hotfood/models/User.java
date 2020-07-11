@@ -17,7 +17,7 @@ public class User implements UserInterface {
 
 	
 	public User(String id,String email,String password,String name,String userType) {
-		init(id,email, password, name, (userType == "0" ? UserType.Resturant : UserType.Resturant));
+		init(id,email, password, name, (userType == "0" ? UserType.Resturant : UserType.Customer));
 	}
 	
 	private void init(String id,String email,String password,String name,UserType userType){
