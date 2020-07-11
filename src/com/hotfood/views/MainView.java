@@ -24,6 +24,7 @@ import com.hotfood.models.Restaurant;
 import com.hotfood.models.ResturantOwnerModel;
 import com.hotfood.models.ResturantsModel;
 
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,16 +36,18 @@ import javax.swing.SwingConstants;
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 
-	JLayeredPane layeredPane;
-	MainModel mainModel;
-	JButton cartButton;
-	JButton backButton;
-	JLabel headerLabel;
-	JLabel backlabel;
+	private JLayeredPane layeredPane;
+	private MainModel mainModel;
+	private JButton cartButton;
+	private JButton backButton;
+	private JLabel headerLabel;
+	private JLabel backlabel;
+	private JButton logoutButton;
 	
 	public MainView() {
 		setResizable(false);
-		
+		ImageIcon icon = new ImageIcon("images/icon.png");
+		this.setIconImage(icon.getImage());
 		getContentPane().setBackground(Color.WHITE);
 		this.setTitle("HOTFOOD");
 		this.setBounds(100, 100, 547, 574);
@@ -60,6 +63,9 @@ public class MainView extends JFrame {
 		backButton = new JButton("Back");
 		backButton.setBounds(10, 15, 89, 23);
 		
+		logoutButton = new JButton("Logout");
+		logoutButton.setBounds(10, 15, 89, 23);
+		
 		headerLabel = new JLabel("HOTFOOD");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headerLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -70,7 +76,7 @@ public class MainView extends JFrame {
 		
 		((MainModel) mainModel).addObserver(mainController);
 
-		ImageIcon background=new ImageIcon("background/background.png");
+		ImageIcon background=new ImageIcon("images/background.png");
 	    Image img=background.getImage();
 	    Image temp=img.getScaledInstance(650,600,Image.SCALE_SMOOTH);
 	    background=new ImageIcon(temp);
@@ -153,6 +159,9 @@ public class MainView extends JFrame {
 				layeredPane.add(backButton);
 			}
 		}
+		if(state == WindowStates.Resturants || state == WindowStates.ResturantOwner) {
+			layeredPane.add(logoutButton);
+		}
 		if(backlabel!=null)
 			layeredPane.add(backlabel);
 	}
@@ -163,5 +172,9 @@ public class MainView extends JFrame {
 	
 	public void addBackButtonListener(ActionListener listener) {
 		backButton.addActionListener(listener);
+	}
+	
+	public void addLogoutButtonListener(ActionListener listener) {
+		logoutButton.addActionListener(listener);
 	}
 }

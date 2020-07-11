@@ -21,8 +21,15 @@ public class MainController implements Controller {
 		mainView.addCartListener(new GotoCartListener());
 		mainView.addBackButtonListener(new BackListener());
 		this.mainView.switchWindow(WindowStates.Login,null);
+		this.mainView.addLogoutButtonListener(new LogoutListener());
 	}
 	
+	class LogoutListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mainModel.logOut();
+		}
+	}
 	
 	class GotoCartListener implements ActionListener{
 		@Override

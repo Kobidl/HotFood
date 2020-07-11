@@ -75,6 +75,7 @@ public class LoginController implements Controller {
 		switch (status) {
 		case Success:
 			message = "User Created Sucessfully";
+			this.loginView.cleanRegisterDetails();
 			break;
 		case BadEmail:
 			message = "Bad email, please try again";

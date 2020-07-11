@@ -41,8 +41,9 @@ public class MainModel extends Observable implements MainModelInterface {
 	
 	public void goBack() {
 		if(this.history.size() > 0) {
-			this.state = this.history.get(0);
-			this.history.remove(0);
+			int index = this.history.size()-1;
+			this.state = this.history.get(index);
+			this.history.remove(index);
 		}
 		setChanged();
 		notifyObservers(this.state);
@@ -96,6 +97,20 @@ public class MainModel extends Observable implements MainModelInterface {
 		this.customer.cleanCart();
 		setChanged();
 		notifyObservers(this.state);
+	}
+
+	public void logOut() {
+		if(this.customer != null) {
+			this.customer = null;
+		}
+		if(this.restaurant != null) {
+			this.restaurant = null;
+		}
+		this.history = new ArrayList<WindowStates>();
+		this.state = WindowStates.Login;
+		setChanged();
+		notifyObservers(this.state);
+		
 	}
 
 }

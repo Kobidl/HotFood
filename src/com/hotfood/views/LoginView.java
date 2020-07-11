@@ -72,6 +72,7 @@ public class LoginView extends Observable implements View{
 			userTypeSelectBox.setFont(new Font("Tahoma", Font.BOLD, 13));
 			userTypeSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Resturant Owner", "Customer"}));
 			userTypeSelectBox.setBounds(171, 334, 139, 22);
+			userTypeSelectBox.setSelectedIndex(1);
 			this.add(userTypeSelectBox);
 			
 			loginEmailInput.setColumns(10);
@@ -168,6 +169,12 @@ public class LoginView extends Observable implements View{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			performeAction(e);
+		}
+
+		public void cleanRegisterDetails() {
+			this.registerEmailInput.setText("");
+			this.registerPasswordInput.setText("");
+			this.registerName.setText("");
 		}
 	}
 	
