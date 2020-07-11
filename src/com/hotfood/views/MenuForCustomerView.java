@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.hotfood.interfaces.DishListView;
 import com.hotfood.interfaces.View;
 import com.hotfood.models.Dish;
 import java.awt.Color;
@@ -16,7 +17,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Point;
 
-public class MenuForCustomerView extends Observable implements View{
+public class MenuForCustomerView extends Observable implements DishListView{
 	private JPanel menu;
 	private JPanel innerPanel;
 	private JScrollPane scroller;
@@ -27,7 +28,6 @@ public class MenuForCustomerView extends Observable implements View{
 		menu.setBounds(0, 50, 546, 520);;
 		menu.setBackground(Color.WHITE);
 		innerPanel = new JPanel();
-//		innerPanel.setBounds(0, 0, 546, 498);
 		innerPanel.setVisible(true);
 	    
 		menu.setLayout(null);
@@ -96,6 +96,12 @@ public class MenuForCustomerView extends Observable implements View{
 		int[] selected = new int[] {index,selectedOption};
 		notifyObservers(selected);
 	}
+	
+	@Override
+	public boolean customerMode() {
+		return true;
+	}
+
 
 }
 	

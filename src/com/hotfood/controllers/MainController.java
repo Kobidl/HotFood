@@ -7,6 +7,7 @@ import com.hotfood.enums.WindowStates;
 import com.hotfood.interfaces.Controller;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
+import com.hotfood.models.Restaurant;
 import com.hotfood.views.MainView;
 
 public class MainController implements Controller {
@@ -44,10 +45,13 @@ public class MainController implements Controller {
 			if(arg == WindowStates.Resturants) {
 				this.mainView.switchWindow(WindowStates.Resturants,null);
 			}
-			if(arg == WindowStates.Cart) {
+			else if(arg == WindowStates.Cart) {
 				this.mainView.switchWindow(WindowStates.Cart,null);
 			}
-			if(arg instanceof Menu ) {
+			else if(arg == WindowStates.ResturantOwner) {
+				this.mainView.switchWindow(WindowStates.ResturantOwner,null);
+			}
+			else if(arg instanceof Menu ) {
 				this.mainView.switchWindow(WindowStates.MenuForCustomer,arg);
 			}
 		}

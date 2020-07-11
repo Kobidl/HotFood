@@ -15,6 +15,7 @@ import com.hotfood.models.Customer;
 import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
+import com.hotfood.models.Restaurant;
 import com.hotfood.models.User;
 import com.hotfood.views.LoginView;
 import com.hotfood.views.LoginView.LoginPanel;
@@ -64,8 +65,8 @@ public class LoginController implements Controller {
 			mainModel.goToResturantsPage(customer);
 		}
 		if(user!=null && user.getType() == UserType.Resturant) {
-//			Resturant resturant = new Resturant(user);
-//			mainController.switchWindowToResturants(resturant);
+			Restaurant resturant = new Restaurant(user);
+			mainModel.goToResturantPage(resturant);
 		}
 	}
 	
@@ -98,3 +99,4 @@ public class LoginController implements Controller {
 		
 	}
 }
+

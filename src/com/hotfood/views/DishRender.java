@@ -3,6 +3,8 @@ package com.hotfood.views;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.hotfood.interfaces.DishListView;
 import com.hotfood.models.Dish;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -24,21 +26,23 @@ public class DishRender extends JPanel implements ActionListener {
 	JLabel priceLabel;
 	private JTextArea textArea;
 	private JButton btnNewButton;
-	MenuForCustomerView dishesView;
+	DishListView dishesView;
 	private JComboBox<String> comboBox;
 	private JLabel lblNewLabel;
 	
-	public DishRender(int index,Dish dish,MenuForCustomerView dishesView) {
+	public DishRender(int index,Dish dish,DishListView dishesView) {
 		this.dishesView = dishesView;
+		boolean customerMode = dishesView.customerMode(); 
+
 //		this.setBounds(0, 0, 546, 498);
 		this.index = index;
 		JPanel panel = this;
     	panel.setBackground(Color.white);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{72, 126, 168, 74, 72, 0};
-		gbl_panel.rowHeights = new int[]{14, 19, 32, 30, 47};
+		gbl_panel.columnWidths = new int[]{15, 126, 194, 149, 14, 0};
+		gbl_panel.rowHeights = customerMode ? new int[]{14, 19, 32, 30, 47} : new int[]{14, 19, 32, 30};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0};
 		panel.setLayout(gbl_panel);
 		
 		JLabel nameLabel = new JLabel("name");
@@ -55,7 +59,7 @@ public class DishRender extends JPanel implements ActionListener {
 		priceLabel = new JLabel("price");
 		priceLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_priceLabel = new GridBagConstraints();
-		gbc_priceLabel.gridwidth = 2;
+		gbc_priceLabel.anchor = GridBagConstraints.EAST;
 		gbc_priceLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_priceLabel.gridx = 3;
 		gbc_priceLabel.gridy = 1;
@@ -67,24 +71,29 @@ public class DishRender extends JPanel implements ActionListener {
 		textArea.setRows(3);
 		textArea.setLineWrap(true);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.gridwidth = 4;
+		gbc_textArea.gridwidth = 3;
 		gbc_textArea.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
 		gbc_textArea.gridy = 2;
 		panel.add(textArea, gbc_textArea);
 		
-		btnNewButton = new JButton("Add to cart");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 3;
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 4;
-		btnNewButton.addActionListener(this);
 		
-		lblNewLabel = new JLabel("Choose option");
+		if(customerMode) {
+			btnNewButton = new JButton("Add to cart");
+			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.gridwidth = 3;
+			gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+			gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+			gbc_btnNewButton.gridx = 1;
+			gbc_btnNewButton.gridy = 4;
+			btnNewButton.addActionListener(this);
+			panel.add(btnNewButton, gbc_btnNewButton);
+
+		}
+		
+		lblNewLabel = new JLabel(customerMode ? "Choose option" : "Options");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -101,12 +110,19 @@ public class DishRender extends JPanel implements ActionListener {
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 3;
 		add(comboBox, gbc_comboBox);
-		panel.add(btnNewButton, gbc_btnNewButton);
 		
     	nameLabel.setText(dish.getName());
     	priceLabel.setText(String.valueOf(dish.getPrice()) + "$");
     	textArea.setText(dish.getDescription());
+		textArea.setRows(getRowsByText(dish.getDescription()));
+
 	}
+
+
+	private int getRowsByText(String description) {
+		return (description.length() / 50);
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

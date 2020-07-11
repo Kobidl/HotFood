@@ -15,4 +15,5 @@ public interface DishInterface  {
 	String toString();
 
 	String[] cleanOptions();
+
 }

@@ -11,6 +11,7 @@ public class MainModel extends Observable implements MainModelInterface {
 
 	private WindowStates state = WindowStates.Login;
 	private Customer customer;
+	private Restaurant restaurant;
 	private List<WindowStates> history = new ArrayList<WindowStates>();
 	
 	public MainModel() {}
@@ -71,5 +72,15 @@ public class MainModel extends Observable implements MainModelInterface {
 		
 	}
 
+	public void goToResturantPage(Restaurant resturant) {
+		this.restaurant = resturant;
+		this.state = WindowStates.ResturantOwner;
+		setChanged();
+		notifyObservers(WindowStates.ResturantOwner);
+	}
+
+	public Restaurant getRestaurant() {
+		return this.restaurant;
+	}
 
 }

@@ -10,6 +10,7 @@ import com.hotfood.controllers.CartController;
 import com.hotfood.controllers.LoginController;
 import com.hotfood.controllers.MainController;
 import com.hotfood.controllers.MenuForCustomerController;
+import com.hotfood.controllers.ResturantOwnerController;
 import com.hotfood.controllers.ResturantsController;
 import com.hotfood.enums.WindowStates;
 import com.hotfood.models.CartModel;
@@ -17,6 +18,8 @@ import com.hotfood.models.LoginModel;
 import com.hotfood.models.MainModel;
 import com.hotfood.models.Menu;
 import com.hotfood.models.MenuForCustomerModel;
+import com.hotfood.models.Restaurant;
+import com.hotfood.models.ResturantOwnerModel;
 import com.hotfood.models.ResturantsModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -68,7 +71,6 @@ public class MainView extends JFrame {
 	
 	public void switchWindow(WindowStates state,Object arg) {
 		layeredPane.removeAll();
-		
 		switch(state) {
 			case Login:
 				LoginView loginView = new LoginView();
@@ -101,6 +103,14 @@ public class MainView extends JFrame {
 				((CartView)cartView).addObserver(cartController);
 				layeredPane.add(cartView.getView());
 				break;
+			case ResturantOwner:
+				ResturantOwnerView resOwnView = new ResturantOwnerView();
+				ResturantOwnerModel resOwnModel = new ResturantOwnerModel(mainModel.getRestaurant());
+				ResturantOwnerController resOwnController = new ResturantOwnerController(resOwnView, resOwnModel);
+				((ResturantOwnerView)resOwnView).addObserver(resOwnController);
+				((ResturantOwnerModel) resOwnModel).addObserver(resOwnController);
+				layeredPane.add(resOwnView.getView());
+				break;
 			default:
 				break;
 		}
@@ -111,8 +121,7 @@ public class MainView extends JFrame {
 
 	public void printHeader(WindowStates state) {
 		layeredPane.add(headerLabel);
-		
-		if(state!= WindowStates.Login) {
+		if(state!= WindowStates.Login && state != WindowStates.ResturantOwner) {
 			if(state != WindowStates.Cart) {
 				layeredPane.add(cartButton);
 			}
