@@ -1,7 +1,11 @@
 package com.hotfood.models;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 
 import com.hotfood.enums.WindowStates;
@@ -9,15 +13,23 @@ import com.hotfood.interfaces.MainModelInterface;
 
 public class MainModel extends Observable implements MainModelInterface {
 
-	private WindowStates state = WindowStates.Login;
+	private WindowStates state;
 	private Customer customer;
 	private Restaurant restaurant;
-	private List<WindowStates> history = new ArrayList<WindowStates>();
+	private List<Map.Entry<WindowStates, Object>> history;
 	
-	public MainModel() {}
+	public MainModel() {
+		this.state = WindowStates.Login;
+		initHistory();
+	}
 	
 	public MainModel(WindowStates state) {
 		this.state = state;
+		initHistory();
+	}
+	
+	private void initHistory() {
+		history = new ArrayList<Map.Entry<WindowStates, Object>>();
 	}
 	
 	public void setState(WindowStates state) {
@@ -40,17 +52,33 @@ public class MainModel extends Observable implements MainModelInterface {
 	}
 	
 	public void goBack() {
+		Object param = null;
 		if(this.history.size() > 0) {
 			int index = this.history.size()-1;
-			this.state = this.history.get(index);
-			this.history.remove(index);
+			this.state = this.history.get(index).getKey();
+			this.history.remove(index);	
+		}
+		if(this.history.size() > 0) {
+			int index = this.history.size()-1;
+			param = this.history.get(index).getValue();
 		}
 		setChanged();
-		notifyObservers(this.state);
+		if(param!=null) {
+			notifyObservers(param);
+		}else {
+			notifyObservers(this.state);
+		}
+	}
+	
+	private void addToHistory() {
+		history.add(new AbstractMap.SimpleEntry<WindowStates, Object>(this.state,null));
+	}
+	private void addToHistory(Object o) {
+		history.add(new AbstractMap.SimpleEntry<WindowStates, Object>(this.state,o));
 	}
 	
 	public void goToCart() {
-		history.add(state);
+		addToHistory();
 		this.state = WindowStates.Cart;
 		setChanged();
 		notifyObservers(this.state);
@@ -61,7 +89,7 @@ public class MainModel extends Observable implements MainModelInterface {
 	}
 
 	public void goToCutomerMenu(Menu menu) {
-		history.add(WindowStates.Resturants);
+		addToHistory(menu);
 		this.state = WindowStates.MenuForCustomer;
 		setChanged();
 		notifyObservers(menu);
@@ -85,14 +113,14 @@ public class MainModel extends Observable implements MainModelInterface {
 	}
 
 	public void goToOrder() {
-		this.history.add(this.state);
+		addToHistory();
 		this.state = WindowStates.Order;
 		setChanged();
 		notifyObservers(WindowStates.Order);
 	}
 
 	public void checkOutOrder() {
-		this.history = new ArrayList<WindowStates>();
+		initHistory();
 		this.state = WindowStates.Resturants;
 		this.customer.cleanCart();
 		setChanged();
@@ -106,7 +134,7 @@ public class MainModel extends Observable implements MainModelInterface {
 		if(this.restaurant != null) {
 			this.restaurant = null;
 		}
-		this.history = new ArrayList<WindowStates>();
+		initHistory();
 		this.state = WindowStates.Login;
 		setChanged();
 		notifyObservers(this.state);
