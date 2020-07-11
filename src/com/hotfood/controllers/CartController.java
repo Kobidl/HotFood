@@ -33,12 +33,16 @@ public class CartController implements Controller  {
 		if(o instanceof CartView) {
 			if(arg instanceof Integer) {
 				model.removeItem((int) arg);
-			}else {
+			}else {				
 				model.checkout();
 			}
 		}else if(o instanceof CartModel) {
 			if(arg instanceof Boolean) {
-				this.mainModel.goToOrder();
+				if((Boolean) arg) {
+					this.mainModel.goToOrder();
+				}else {
+					JOptionPane.showMessageDialog(null,"You must have at least 1 item in the cart to continue");
+				}
 			}else {
 				view.printItems(model.getDishes());
 			}

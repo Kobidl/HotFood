@@ -26,6 +26,7 @@ public class OrderView extends Observable implements View{
 	private JRadioButton  takeawayRadio;
 	private JRadioButton deliveryRadio;
 	private JButton finishBtn;
+	private JLabel itemsLabel;
 	
 	public OrderView() {
 		panel = new JPanel();
@@ -44,16 +45,13 @@ public class OrderView extends Observable implements View{
 		lblNewLabel_1.setBounds(58, 62, 98, 14);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Items:");
-		lblNewLabel_2.setBounds(68, 87, 263, 14);
-		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Restauratns:");
-		lblNewLabel_3.setBounds(67, 112, 264, 14);
-		panel.add(lblNewLabel_3);
+		itemsLabel = new JLabel("Items:");
+		itemsLabel.setBounds(68, 87, 263, 14);
+		panel.add(itemsLabel);
+
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 137, 480, 2);
+		separator_1.setBounds(10, 128, 480, 2);
 		panel.add(separator_1);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -185,6 +183,10 @@ public class OrderView extends Observable implements View{
 	
 	public void setButtonEnable(boolean enable) {
 		this.finishBtn.setEnabled(enable);
+	}
+
+	public void setItemsCount(int itemsCount) {
+		this.itemsLabel.setText("Items: " + Integer.toString(itemsCount));
 	}
 }
 	

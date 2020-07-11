@@ -24,6 +24,7 @@ public class OrderController implements Controller  {
 		this.orderView = orderView;
 		this.orderModel = orderModel;
 		this.mainModel = mainModel;
+		this.orderView.setItemsCount(orderModel.getItemsCount());
 	}
 
 	@Override
