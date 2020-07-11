@@ -1,6 +1,9 @@
 package com.hotfood.controllers;
 
 import java.util.Observable;
+
+import javax.swing.JOptionPane;
+
 import com.hotfood.interfaces.Controller;
 import com.hotfood.models.DishInCart;
 import com.hotfood.models.MainModel;
@@ -38,7 +41,8 @@ public class MenuForCustomerController implements Controller  {
 			}
 		}else if(o instanceof MenuForCustomerModel){//Update from model
 			if(arg instanceof DishInCart) { //update main model -> add item to cart
-				mainModel.addItemToCart((DishInCart)arg);				
+				mainModel.addItemToCart((DishInCart)arg);
+				JOptionPane.showMessageDialog(this.menuView.getView(),"The item has been successfuly added to your cart");
 			}
 		}
 	}
